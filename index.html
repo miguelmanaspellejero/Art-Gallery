@@ -7,10 +7,20 @@
         <meta name="author" content="Miguel Mañas" />
         <script src="js/main.js" defer></script>
         <link rel="stylesheet" href="css/style.css" />
-        <title>MET API</title>
+        <title>Art Gallery</title>
     </head>
     <body>
-        <h1>Art Gallery</h1>
+        <header>
+            <h1>Art Gallery</h1>
+            <nav>
+                <input
+                    id="searchInput"
+                    type="text"
+                    placeholder="Vincent van Gogh"
+                />
+                <button id="searchButton">Search</button>
+            </nav>
+        </header>
         <figure>
             <img class="picture" width="400" />
             <figcaption class="information">
@@ -18,13 +28,5 @@
                 <span id="year"></span>
             </figcaption>
         </figure>
-        <p>
-            <input
-                id="searchInput"
-                type="text"
-                placeholder="Vincent van Gogh"
-            />
-            <button id="searchButton">Search</button>
-        </p>
     </body>
 </html>
