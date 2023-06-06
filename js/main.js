@@ -1,13 +1,13 @@
-const query = document.querySelector("#searchInput").value;
-
 // Search query from input clicking button.
 document.querySelector("#searchButton").addEventListener("click", () => {
+    const query = document.querySelector("#searchInput").value;
     searchIds(query);
 });
 
 // Search query from input by pressing Enter.
 document.querySelector("#searchInput").addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
+        const query = document.querySelector("#searchInput").value;
         searchIds(query);
     }
 });
