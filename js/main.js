@@ -1,43 +1,55 @@
+const query = document.querySelector("#searchInput").value;
+
 // Search query from input clicking button.
 document.querySelector("#searchButton").addEventListener("click", () => {
-    const query = document.querySelector("#searchInput").value;
-    searchEntry(query);
+    searchIds(query);
 });
 
 // Search query from input by pressing Enter.
 document.querySelector("#searchInput").addEventListener("keydown", (e) => {
-    const query = document.querySelector("#searchInput").value;
     if (e.key === "Enter") {
-        searchEntry(query);
+        searchIds(query);
     }
 });
 
 // API url for searches. Only search ones that have images. This gives a list of IDs.
-const search =
+const searchUrl =
     "https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=";
 
-//  function to get array of results from search.
-async function searchEntry(query) {
-    const response = await fetch(search + query);
-    const data = await response.json();
-    loadInfo(data);
+//  function to get array of ID results from search.
+async function searchIds(query) {
+    const response = await fetch(searchUrl + query);
+    const entries = await response.json();
+    loadObjectInfo(entries);
 }
 
-// API url for getting data from earch ID.
-const url = "https://collectionapi.metmuseum.org/public/collection/v1/objects/";
+// API url for getting data from each ID.
+const objectInfoUrl =
+    "https://collectionapi.metmuseum.org/public/collection/v1/objects/";
 
-// function to load data from API Id entry and print on screen.
-async function loadInfo(info) {
-    const load = url + info.objectIDs[0]; // Show only first entry.
-    const response = await fetch(load);
-    const data = await response.json();
-    // Only show results if image is in public domain an can be shown.
-    if (data.isPublicDomain) {
-        document.querySelector(".picture").src = data.primaryImage;
-        document.querySelector("#title").innerText = data.title;
-        document.querySelector("#author").innerText = data.artistDisplayName;
-        document.querySelector("#year").innerText = data.objectDate;
+const results = [];
+
+// function to load data from API for each Id entry. If the entry is in public domain, it pushes it to results.
+async function loadObjectInfo(entries) {
+    for (const entry of entries.objectIDs) {
+        const info = objectInfoUrl + entry;
+        const response = await fetch(info);
+        const data = await response.json();
+        if (data.isPublicDomain) {
+            results.push(data);
+            printContent(data);
+        }
     }
 }
 
-searchEntry("van gogh"); // initial call to show images at first load.
+function printContent(data) {
+    const templateCard = document.querySelector(".resultCard");
+    const clone = templateCard.content.cloneNode(true);
+    clone.querySelector(".picture").src = data.primaryImage;
+    clone.querySelector(".title").innerText = data.title;
+    clone.querySelector(".author").innerText = data.artistDisplayName;
+    clone.querySelector(".year").innerText = data.objectDate;
+    document.querySelector("#container").appendChild(clone);
+}
+
+searchIds("van gogh"); // initial call to show images at first load.
