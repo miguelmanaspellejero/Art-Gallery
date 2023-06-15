@@ -1,4 +1,53 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display&family=Vollkorn&family=Work+Sans&display=swap");
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    color-scheme: light dark;
+}
+
+h1 {
+    font-family: "Playfair Display", serif;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 2em;
+    border-bottom: 2px solid #000;
+}
+
 #container {
     display: flex;
     flex-wrap: wrap;
+}
+
+figure {
+    padding: 2em;
+    border: 2px solid #000;
+    box-shadow: 0.5em 0.5em rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+.picture {
+    height: 400px;
+    margin-bottom: 2em;
+}
+
+span {
+    line-height: 2;
+    text-align: center;
+    font-family: "Vollkorn", serif;
+}
+
+.title {
+    font-style: italic;
+    font-size: 1.2em;
+}
+
+.author {
+    font-weight: bold;
 }
