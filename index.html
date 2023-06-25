@@ -7,35 +7,51 @@
         <meta name="author" content="Miguel Mañas" />
         <script src="js/main.js" defer></script>
         <link rel="stylesheet" href="css/style.css" />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        />
         <title>Art Gallery</title>
     </head>
     <body>
-        <header>
-            <h1>Art Gallery</h1>
-            <nav>
+        <header class="header-top">
+            <h1>
+                <span class="material-symbols-outlined"> palette </span> Art
+                Gallery
+            </h1>
+            <div class="container-search">
                 <input
-                    id="searchInput"
+                    id="search-input"
                     type="text"
-                    placeholder="Vincent van Gogh"
+                    name="q"
+                    placeholder="Search"
+                    aria-label="search"
+                    spellcheck="false"
                 />
-                <button id="searchButton">Search</button>
-                <button id="order">Order</button>
-            </nav>
+                <button
+                    id="search-button"
+                    type="submit"
+                    aria-label="submit search"
+                >
+                    <span class="material-symbols-outlined">search</span>
+                </button>
+            </div>
         </header>
         <main>
-            <div id="container"></div>
+            <div class="container-status">
+                <h3 class="status-message">Showing</h3>
+            </div>
+            <div class="container-artworks"></div>
         </main>
     </body>
-    <template id="artwork">
-        <figure>
-            <div>
-                <img class="picture" />
-                <figcaption class="information">
-                    <span class="title"></span><br />
-                    <span class="author"></span><br />
-                    <span class="year"></span>
-                </figcaption>
+    <template id="artworks">
+        <div class="artwork">
+            <img class="picture" />
+            <div class="information">
+                <p class="title"></p>
+                <p class="author"></p>
+                <p class="year"></p>
             </div>
-        </figure>
+        </div>
     </template>
 </html>
