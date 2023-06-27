@@ -1,22 +1,26 @@
-// Search query from input clicking button.
-document.querySelector("#search-button").addEventListener("click", () => {
-    // clearContent();
-    const query = document.querySelector("#search-input").value;
-    searchIds(query);
-});
+let results = [];
 
-// Search query from input by pressing Enter.
+// Click and enter search events
+document.querySelector("#search-button").addEventListener("click", startSearch);
 document.querySelector("#search-input").addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
-        // clearContent();
-        const query = document.querySelector("#search-input").value;
-        searchIds(query);
+        startSearch();
     }
 });
 
-// document.querySelector("#sort").addEventListener("click", () => {});
+// Start search query from input
+function startSearch() {
+    // clearContent();
+    document.querySelector(".status-message").textContent = "Loading...";
+    const query = document.querySelector("#search-input").value;
+    searchIds(query);
+}
 
-let results = [];
+function showStatus(query) {
+    document.querySelector(
+        ".status-message"
+    ).textContent = `Showing ${results.length} results for "${query}"`;
+}
 
 //  function to get array of ID results from search.
 async function searchIds(query) {
@@ -25,11 +29,15 @@ async function searchIds(query) {
         "https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&isHighlight=true&q=";
     const response = await fetch(searchUrl + query);
     const entries = await response.json();
+    if (entries.objectIDs === null) {
+        document.querySelector(
+            ".status-message"
+        ).textContent = `No results matching "${query}"`;
+    }
     await loadObjectInfo(entries);
-    printContent();
+    await printContent();
+    showStatus(query);
 }
-
-// API url for getting data from each ID.
 
 // function to load data from API for each Id entry. If the entry is in public domain, it pushes it to results.
 async function loadObjectInfo(entries) {
@@ -46,16 +54,16 @@ async function loadObjectInfo(entries) {
     }
 }
 
-function printContent() {
+async function printContent() {
     const fragment = document.createDocumentFragment();
     const template = document.querySelector("#artworks").content;
     for (const result of results) {
         const clone = template.cloneNode(true);
         clone.querySelector(".picture").src = result.primaryImageSmall;
         clone.querySelector(".picture").alt = result.title;
-        clone.querySelector(".title").innerText = result.title;
-        clone.querySelector(".author").innerText = result.artistDisplayName;
-        clone.querySelector(".year").innerText = result.objectDate;
+        clone.querySelector(".title").textContent = result.title;
+        clone.querySelector(".author").textContent = result.artistDisplayName;
+        clone.querySelector(".year").textContent = result.objectDate;
         fragment.appendChild(clone);
     }
     document.querySelector(".container-artworks").appendChild(fragment);
