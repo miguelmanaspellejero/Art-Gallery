@@ -10,16 +10,21 @@ document.querySelector("#search-input").addEventListener("keydown", (event) => {
 
 // Start search query from input
 function startSearch() {
-    // clearContent();
-    document.querySelector(".status-message").textContent = "Loading...";
     const query = document.querySelector("#search-input").value;
+    // clearContent();
+    showStatus(query, "loading");
     searchIds(query);
 }
 
-function showStatus(query) {
-    document.querySelector(
-        ".status-message"
-    ).textContent = `Showing ${results.length} results for "${query}"`;
+function showStatus(query, status) {
+    const statusMessage = document.querySelector(".status-message");
+    if (status === "loading") {
+        statusMessage.textContent = "Loading ...";
+    } else if (status === "finished") {
+        statusMessage.textContent = `Showing ${results.length} results for "${query}"`;
+    } else if (status === "notFound") {
+        statusMessage.textContent = `No results matching "${query}"`;
+    }
 }
 
 //  function to get array of ID results from search.
@@ -30,13 +35,11 @@ async function searchIds(query) {
     const response = await fetch(searchUrl + query);
     const entries = await response.json();
     if (entries.objectIDs === null) {
-        document.querySelector(
-            ".status-message"
-        ).textContent = `No results matching "${query}"`;
+        showStatus(query, "notFound");
     }
     await loadObjectInfo(entries);
     await printContent();
-    showStatus(query);
+    showStatus(query, "finished");
 }
 
 // function to load data from API for each Id entry. If the entry is in public domain, it pushes it to results.
