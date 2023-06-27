@@ -1,4 +1,5 @@
 let results = [];
+let newSearch = false;
 
 // Click and enter search events
 document.querySelector("#search-button").addEventListener("click", startSearch);
@@ -11,19 +12,22 @@ document.querySelector("#search-input").addEventListener("keydown", (event) => {
 // Start search query from input
 function startSearch() {
     const query = document.querySelector("#search-input").value;
-    // clearContent();
-    showStatus(query, "loading");
+    clearContent();
     searchIds(query);
 }
 
 function showStatus(query, status) {
     const statusMessage = document.querySelector(".status-message");
+    const spinner = document.querySelector(".spinner");
     if (status === "loading") {
-        statusMessage.textContent = "Loading ...";
+        statusMessage.textContent = "Loading";
+        spinner.style.visibility = "visible";
     } else if (status === "finished") {
         statusMessage.textContent = `Showing ${results.length} results for "${query}"`;
+        spinner.style.visibility = "hidden";
     } else if (status === "notFound") {
         statusMessage.textContent = `No results matching "${query}"`;
+        spinner.style.visibility = "hidden";
     }
 }
 
@@ -34,6 +38,7 @@ async function searchIds(query) {
         "https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&isHighlight=true&q=";
     const response = await fetch(searchUrl + query);
     const entries = await response.json();
+    showStatus(query, "loading");
     if (entries.objectIDs === null) {
         showStatus(query, "notFound");
     }
@@ -52,7 +57,6 @@ async function loadObjectInfo(entries) {
         const data = await response.json();
         if (data.isPublicDomain) {
             results.push(data);
-            console.log(results);
         }
     }
 }
@@ -61,6 +65,9 @@ async function printContent() {
     const fragment = document.createDocumentFragment();
     const template = document.querySelector("#artworks").content;
     for (const result of results) {
+        if (newSearch) {
+            break;
+        }
         const clone = template.cloneNode(true);
         clone.querySelector(".picture").src = result.primaryImageSmall;
         clone.querySelector(".picture").alt = result.title;

@@ -1,9 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display&family=Vollkorn&family=Work+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Flow+Circular&family=Playfair+Display&family=Vollkorn&family=Work+Sans&display=swap");
 
 :root {
     --font-display: "Playfair Display", serif;
     --font-serif: "Vollkorn", serif;
     --font-sans: "Work Sans", sans-serif;
+    --font-placeholder: "Flow Circular", cursive;
     --color-accent: #7030ff;
     --color-background: #f0f0f0;
     --color-text: #101010;
@@ -16,8 +17,18 @@
     color: var(--color-text);
 }
 
+a {
+    text-decoration: none;
+}
+
 .material-symbols-outlined {
     font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
+    user-select: none;
+}
+
+.filled {
+    font-variation-settings: "FILL" 1;
+    color: var(--color-accent);
 }
 
 html {
@@ -26,7 +37,7 @@ html {
 }
 
 h1 {
-    font-family: "Playfair Display", serif;
+    font-family: var(--font-display);
 }
 
 .header-top {
@@ -93,6 +104,23 @@ h1 {
 
 .status-message {
     font-family: var(--font-serif);
+    margin-right: 2rch;
+}
+
+.spinner {
+    visibility: hidden;
+    border: 2px solid var(--color-accent);
+    border-top: 2px solid var(--color-background);
+    border-radius: 50%;
+    width: 1rem;
+    height: 1rem;
+    animation: loading 1s linear infinite;
+}
+
+@keyframes loading {
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .container-artworks {
@@ -110,13 +138,13 @@ h1 {
 }
 
 .picture {
-    height: 400px;
+    height: 20rem;
     margin-bottom: 2em;
 }
 
 .information {
     height: 7.5rem;
-    width: 75%;
+    width: 66%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

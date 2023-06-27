@@ -15,10 +15,12 @@
     </head>
     <body>
         <header class="header-top">
-            <h1>
-                <span class="material-symbols-outlined"> palette </span> Art
-                Gallery
-            </h1>
+            <a href="#top">
+                <h1>
+                    <span class="material-symbols-outlined"> palette </span> Art
+                    Gallery
+                </h1>
+            </a>
             <div class="container-search">
                 <input
                     id="search-input"
@@ -40,6 +42,7 @@
         <main>
             <div class="container-status">
                 <h3 class="status-message"></h3>
+                <div class="spinner"></div>
             </div>
             <div class="container-artworks"></div>
         </main>
@@ -54,6 +57,12 @@
                 <p class="author"></p>
                 <p class="year"></p>
             </div>
+        </div>
+    </template>
+    <template id="placeholders">
+        <div class="placeholder">
+            <div class="placeholder-image"></div>
+            <div class="placeholder-text"></div>
         </div>
     </template>
 </html>
