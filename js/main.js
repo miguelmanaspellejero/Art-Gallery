@@ -1,4 +1,4 @@
-let results = [];
+const results = [];
 let newSearch = false;
 
 // Click and enter search events
@@ -18,16 +18,18 @@ function startSearch() {
 
 function showStatus(query, status) {
     const statusMessage = document.querySelector(".status-message");
-    const spinner = document.querySelector(".spinner");
+    document
+        .querySelector(".spinner")
+        .classList.toggle("display-flex", status === "loading");
+    document
+        .querySelector(".loader")
+        .classList.toggle("display-flex", status === "loading");
     if (status === "loading") {
         statusMessage.textContent = "Loading";
-        spinner.style.visibility = "visible";
     } else if (status === "finished") {
         statusMessage.textContent = `Showing ${results.length} results for "${query}"`;
-        spinner.style.visibility = "hidden";
     } else if (status === "notFound") {
         statusMessage.textContent = `No results matching "${query}"`;
-        spinner.style.visibility = "hidden";
     }
 }
 
@@ -83,6 +85,6 @@ async function printContent() {
 
 function clearContent() {
     // Previous load function is not interrupted!!!.
-    results = [];
+    results.splice(0);
     document.querySelector(".container-artworks").replaceChildren();
 }
