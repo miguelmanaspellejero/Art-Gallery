@@ -19,6 +19,7 @@ function startSearch() {
 }
 
 //Control search functions process
+
 async function controlSearchProcess(query) {
     limitSearches(true);
     showSearchStatus(query, "loading");
@@ -86,6 +87,7 @@ async function loadObjectInfo(entries) {
     }
 }
 
+// Print content in DOM
 async function printContent() {
     const fragment = document.createDocumentFragment();
     const template = document.querySelector("#artworks").content;
