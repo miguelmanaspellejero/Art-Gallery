@@ -34,10 +34,6 @@ main {
     color: var(--color-accent);
 }
 
-.display-flex {
-    display: flex;
-}
-
 html {
     /* color-scheme: light dark; */
     background-color: var(--color-background);
@@ -76,7 +72,7 @@ h1 {
 
 #search-input {
     border: none;
-    background: transparent;
+    background-color: transparent;
     font-family: var(--font-sans);
     font-size: 1.125rem;
     flex-grow: 1;
@@ -92,7 +88,7 @@ h1 {
     justify-content: center;
     border: none;
     cursor: pointer;
-    background: transparent;
+    background-color: transparent;
     border-radius: 50%;
     width: 2rem;
     height: 2rem;
@@ -104,9 +100,9 @@ h1 {
 }
 
 .container-status {
-    display: none;
+    display: flex;
     align-items: center;
-    margin: 0 0 2rem 2.5rem;
+    margin: 1rem 0;
 }
 
 .status-message {
@@ -115,7 +111,7 @@ h1 {
 }
 
 .spinner {
-    display: flex;
+    display: none;
     border: 2px solid var(--color-accent);
     border-top: 2px solid transparent;
     border-radius: 50%;
@@ -135,7 +131,6 @@ h1 {
     width: 100%;
     height: 90vh;
     border-radius: 1em;
-    background: var(--color-background);
     background-image: linear-gradient(
         90deg,
         transparent,
@@ -196,4 +191,24 @@ h1 {
 
 .year {
     font-family: var(--font-sans);
+}
+
+.display-flex {
+    display: flex;
+}
+
+#search-button:disabled,
+#search-input:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+#search-button:disabled:hover {
+    background-color: transparent;
+}
+
+.container-search.disabled {
+    border: none;
+    background-color: rgba(0, 0, 0, 0.15);
+    cursor: default;
 }
