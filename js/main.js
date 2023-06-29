@@ -14,11 +14,39 @@ function startSearch() {
     const query = document.querySelector("#search-input").value;
     if (searchRunning === false && query.length > 0) {
         clearContent();
-        searchIds(query);
+        controlSearchProcess(query);
     }
 }
 
-function showStatus(query, status) {
+//Control search functions process
+
+async function controlSearchProcess(query) {
+    limitSearches(true);
+    showSearchStatus(query, "loading");
+    const entries = await fetchIds(query);
+    if (entries.objectIDs === null) {
+        showSearchStatus(query, "notFound");
+        limitSearches(false);
+        return;
+    }
+    await loadObjectInfo(entries);
+    await printContent();
+    showSearchStatus(query, "finished");
+    limitSearches(false);
+}
+
+// Avoid new searches until current search process has finished.
+function limitSearches(value) {
+    searchRunning = value;
+    document
+        .querySelector(".container-search")
+        .classList.toggle("disabled", searchRunning);
+    document.querySelector("#search-button").disabled = value;
+    document.querySelector("#search-input").disabled = value;
+}
+
+// Update status of the search process and results.
+function showSearchStatus(query, status) {
     const statusMessage = document.querySelector(".status-message");
     document
         .querySelector(".spinner")
@@ -36,32 +64,13 @@ function showStatus(query, status) {
 }
 
 //  function to get array of ID results from search.
-async function searchIds(query) {
-    controlSearches(true);
+async function fetchIds(query) {
     // API url for searches. Only search ones that have images and are highlight. This gives a list of IDs.
     const searchUrl =
         "https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&isHighlight=true&q=";
     const response = await fetch(searchUrl + query);
     const entries = await response.json();
-    showStatus(query, "loading");
-    if (entries.objectIDs === null) {
-        showStatus(query, "notFound");
-        controlSearches(false);
-        return;
-    }
-    await loadObjectInfo(entries);
-    await printContent();
-    showStatus(query, "finished");
-    controlSearches(false);
-}
-
-function controlSearches(value) {
-    searchRunning = value;
-    document
-        .querySelector(".container-search")
-        .classList.toggle("disabled", searchRunning);
-    document.querySelector("#search-button").disabled = value;
-    document.querySelector("#search-input").disabled = value;
+    return entries;
 }
 
 // function to load data from API for each Id entry. If the entry is in public domain, it pushes it to results.
