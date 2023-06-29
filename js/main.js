@@ -19,6 +19,7 @@ function startSearch() {
 }
 
 //Control search functions process
+
 async function controlSearchProcess(query) {
     limitSearches(true);
     showSearchStatus(query, "loading");
