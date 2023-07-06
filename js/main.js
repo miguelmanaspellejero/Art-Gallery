@@ -1,4 +1,6 @@
-const results = [];
+import { showSearchStatus, printContent } from "./modules/dom.js";
+import { results, fetchIds, fetchDetails } from "./modules/fetch.js";
+
 let searchRunning = false; // This avoids new searches from being started until current is finished.
 
 // Click and enter search events
@@ -29,7 +31,7 @@ async function controlSearchProcess(query) {
         limitSearches(false);
         return;
     }
-    await loadObjectInfo(entries);
+    await fetchDetails(entries);
     await printContent();
     showSearchStatus(query, "finished");
     limitSearches(false);
@@ -43,64 +45,6 @@ function limitSearches(value) {
         .classList.toggle("disabled", searchRunning);
     document.querySelector("#search-button").disabled = value;
     document.querySelector("#search-input").disabled = value;
-}
-
-// Update status of the search process and results.
-function showSearchStatus(query, status) {
-    const statusMessage = document.querySelector(".status-message");
-    document
-        .querySelector(".spinner")
-        .classList.toggle("display-flex", status === "loading");
-    document
-        .querySelector(".loader")
-        .classList.toggle("display-flex", status === "loading");
-    if (status === "loading") {
-        statusMessage.textContent = "Loading";
-    } else if (status === "finished") {
-        statusMessage.textContent = `Showing ${results.length} results for "${query}"`;
-    } else if (status === "notFound") {
-        statusMessage.textContent = `No results matching "${query}"`;
-    }
-}
-
-//  function to get array of ID results from search.
-async function fetchIds(query) {
-    // API url for searches. Only search ones that have images and are highlight. This gives a list of IDs.
-    const searchUrl =
-        "https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&isHighlight=true&q=";
-    const response = await fetch(searchUrl + query);
-    const entries = await response.json();
-    return entries;
-}
-
-// function to load data from API for each Id entry. If the entry is in public domain, it pushes it to results.
-async function loadObjectInfo(entries) {
-    const objectInfoUrl =
-        "https://collectionapi.metmuseum.org/public/collection/v1/objects/";
-    for (const entry of entries.objectIDs) {
-        const info = objectInfoUrl + entry;
-        const response = await fetch(info);
-        const data = await response.json();
-        if (data.isPublicDomain) {
-            results.push(data);
-        }
-    }
-}
-
-// Print content in DOM
-async function printContent() {
-    const fragment = document.createDocumentFragment();
-    const template = document.querySelector("#artworks").content;
-    for (const result of results) {
-        const clone = template.cloneNode(true);
-        clone.querySelector(".picture").src = result.primaryImageSmall;
-        clone.querySelector(".picture").alt = result.title;
-        clone.querySelector(".title").textContent = result.title;
-        clone.querySelector(".author").textContent = result.artistDisplayName;
-        clone.querySelector(".year").textContent = result.objectDate;
-        fragment.appendChild(clone);
-    }
-    document.querySelector(".container-artworks").appendChild(fragment);
 }
 
 // Clear previous loaded content when a new search is made
