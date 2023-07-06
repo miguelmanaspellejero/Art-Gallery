@@ -24,6 +24,9 @@ export async function printContent() {
     const template = document.querySelector("#artworks").content;
     for (const result of results) {
         const clone = template.cloneNode(true);
+        clone.querySelector(
+            ".detail-link"
+        ).href = `detail.html?image=${result.primaryImage}&title=${result.title}$author=${result.artistDisplayName}$year=${result.objectDate}`;
         clone.querySelector(".picture").src = result.primaryImageSmall;
         clone.querySelector(".picture").alt = result.title;
         clone.querySelector(".title").textContent = result.title;

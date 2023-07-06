@@ -1,5 +1,5 @@
 import { showSearchStatus, printContent } from "./modules/dom.js";
-import { results, fetchIds, fetchDetails } from "./modules/fetch.js";
+import { results, fetchIds, fetchData } from "./modules/fetch.js";
 
 let searchRunning = false; // This avoids new searches from being started until current is finished.
 
@@ -31,7 +31,7 @@ async function controlSearchProcess(query) {
         limitSearches(false);
         return;
     }
-    await fetchDetails(entries);
+    await fetchData(entries);
     await printContent();
     showSearchStatus(query, "finished");
     limitSearches(false);

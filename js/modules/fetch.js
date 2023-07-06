@@ -11,7 +11,7 @@ export async function fetchIds(query) {
 }
 
 // function to load data from API for each Id entry. If the entry is in public domain, it pushes it to results.
-export async function fetchDetails(entries) {
+export async function fetchData(entries) {
     const objectInfoUrl =
         "https://collectionapi.metmuseum.org/public/collection/v1/objects/";
     for (const entry of entries.objectIDs) {
