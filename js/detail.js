@@ -1,14 +1,22 @@
-// document.title =
-showDetails();
+fetchDetails();
 
-async function showDetails() {
-    const url = new URL(window.location.href);
-    const image = url.searchParams.get("image");
-    const title = url.searchParams.get("title");
-    const author = url.searchParams.get("author");
-    const year = url.searchParams.get("year");
+async function fetchDetails() {
+    const detailUrl = new URL(window.location.href);
+    const id = detailUrl.searchParams.get("id");
+    const objectInfoUrl =
+        "https://collectionapi.metmuseum.org/public/collection/v1/objects/";
+    const response = await fetch(objectInfoUrl + id);
+    const data = await response.json();
+    printDetails(data);
+}
 
-    document.querySelector(".artwork-detail img").src = image;
+function printDetails(data) {
+    document.querySelector(".artwork-detail img").src = data.primaryImage;
+    document.querySelector(".artwork-detail img").alt = data.title;
+    document.querySelector(".detail-title").textContent = data.title;
+    document.querySelector(".detail-author").textContent =
+        data.artistDisplayName;
+    document.querySelector(".detail-year").textContent = data.objectDate;
 }
 
 document
