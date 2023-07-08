@@ -65,14 +65,17 @@ function clearContent() {
     document.querySelector(".container-artworks").replaceChildren();
 }
 
+// print restored array from localStorage
 function restoreContent() {
     printArtworks(loadResults());
 }
 
+// show previous status
 function restoreQueryAndStatus() {
     document.querySelector(".status-message").textContent =
         loadQueryAndStatus();
 }
 
+// Call them only from other pages when turning back?
 restoreContent();
 restoreQueryAndStatus();
