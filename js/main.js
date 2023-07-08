@@ -1,5 +1,13 @@
-import { showSearchStatus, printContent } from "./modules/dom.js";
-import { results, fetchIds, fetchData } from "./modules/fetch.js";
+import { showSearchStatus, printArtworks } from "./modules/dom.js";
+import {
+    results,
+    fetchIds,
+    fetchData,
+    saveResults,
+    loadResults,
+    saveQueryAndStatus,
+    loadQueryAndStatus,
+} from "./modules/fetch.js";
 
 let searchRunning = false; // This avoids new searches from being started until current is finished.
 
@@ -28,12 +36,15 @@ async function controlSearchProcess(query) {
     const entries = await fetchIds(query);
     if (entries.objectIDs === null) {
         showSearchStatus(query, "notFound");
+        saveQueryAndStatus();
+        saveResults();
         limitSearches(false);
         return;
     }
     await fetchData(entries);
-    await printContent();
+    await printArtworks(results);
     showSearchStatus(query, "finished");
+    saveQueryAndStatus();
     limitSearches(false);
 }
 
@@ -50,7 +61,18 @@ function limitSearches(value) {
 // Clear previous loaded content when a new search is made
 
 function clearContent() {
-    // Previous load function is not interrupted!!!.
     results.splice(0);
     document.querySelector(".container-artworks").replaceChildren();
 }
+
+function restoreContent() {
+    printArtworks(loadResults());
+}
+
+function restoreQueryAndStatus() {
+    document.querySelector(".status-message").textContent =
+        loadQueryAndStatus();
+}
+
+restoreContent();
+restoreQueryAndStatus();

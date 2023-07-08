@@ -22,4 +22,24 @@ export async function fetchData(entries) {
             results.push(data);
         }
     }
+    saveResults();
+}
+
+export function saveResults() {
+    localStorage.setItem("savedResults", JSON.stringify(results));
+}
+
+export function loadResults() {
+    return JSON.parse(localStorage.getItem("savedResults"));
+}
+
+export function saveQueryAndStatus() {
+    localStorage.setItem(
+        "statusMessage",
+        document.querySelector(".status-message").textContent
+    );
+}
+
+export function loadQueryAndStatus() {
+    return localStorage.getItem("statusMessage");
 }

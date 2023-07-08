@@ -19,19 +19,19 @@ export function showSearchStatus(query, status) {
 }
 
 // Print content in DOM
-export async function printContent() {
+export async function printArtworks(artworks) {
     const fragment = document.createDocumentFragment();
     const template = document.querySelector("#artworks").content;
-    for (const result of results) {
+    for (const artwork of artworks) {
         const clone = template.cloneNode(true);
         clone.querySelector(
             ".detail-link"
-        ).href = `detail.html?id=${result.objectID}`;
-        clone.querySelector(".picture").src = result.primaryImageSmall;
-        clone.querySelector(".picture").alt = result.title;
-        clone.querySelector(".title").textContent = result.title;
-        clone.querySelector(".author").textContent = result.artistDisplayName;
-        clone.querySelector(".year").textContent = result.objectDate;
+        ).href = `detail.html?id=${artwork.objectID}`;
+        clone.querySelector(".picture").src = artwork.primaryImageSmall;
+        clone.querySelector(".picture").alt = artwork.title;
+        clone.querySelector(".title").textContent = artwork.title;
+        clone.querySelector(".author").textContent = artwork.artistDisplayName;
+        clone.querySelector(".year").textContent = artwork.objectDate;
         fragment.appendChild(clone);
     }
     document.querySelector(".container-artworks").appendChild(fragment);
