@@ -12,6 +12,7 @@ async function fetchDetails() {
 
 function printDetails(data) {
     document.title = data.title;
+    document.querySelector(".artwork-detail a").href = data.primaryImage;
     document.querySelector(".artwork-detail img").src = data.primaryImage;
     document.querySelector(".artwork-detail img").alt = data.title;
     document.querySelector(".detail-title").textContent = data.title;
