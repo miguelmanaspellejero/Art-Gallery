@@ -5,6 +5,7 @@
     --font-serif: "Vollkorn", serif;
     --font-sans: "Work Sans", sans-serif;
     --color-accent: #7030ff;
+    --color-favorite: #e60000;
     --color-background: #f0f0f0;
     --color-text: #101010;
 }
@@ -215,6 +216,11 @@ h1 {
     width: 2rem;
     height: 2rem;
     transition: none;
+}
+
+.favorite-button:hover span {
+    text-shadow: 0 0 0.5rem var(--color-favorite);
+    -webkit-text-stroke: 1.5px var(--color-favorite);
 }
 
 .favorite-button span {

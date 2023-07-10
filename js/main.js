@@ -13,8 +13,8 @@ let searchRunning = false; // This avoids new searches from being started until 
 
 // Click and enter search events
 document.querySelector("#search-button").addEventListener("click", startSearch);
-document.querySelector("#search-input").addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
+document.querySelector("#search-input").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
         startSearch();
     }
 });
@@ -68,6 +68,7 @@ function clearContent() {
 // print restored array from localStorage
 function restoreContent() {
     printArtworks(loadResults());
+    results.push(loadResults());
 }
 
 // show previous status
@@ -79,3 +80,19 @@ function restoreQueryAndStatus() {
 // Call them only from other pages when turning back?
 restoreContent();
 restoreQueryAndStatus();
+
+export function favEvent(artworks) {
+    const favList = [];
+    const favButtons = document.querySelectorAll(".favorite-button");
+    for (const favButton of favButtons) {
+        favButton.addEventListener("click", (e) => {
+            const id = +e.target.parentNode.getAttribute("data-id");
+            for (const artwork of artworks) {
+                if (artwork.objectID === id) {
+                    favList.push(artwork);
+                }
+            }
+            console.log(favList);
+        });
+    }
+}

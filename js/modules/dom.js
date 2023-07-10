@@ -1,4 +1,5 @@
 import { results } from "./fetch.js";
+import { favEvent } from "../main.js";
 
 // Update status of the search process and results.
 export function showSearchStatus(query, status) {
@@ -29,10 +30,14 @@ export async function printArtworks(artworks) {
         ).href = `detail.html?id=${artwork.objectID}`;
         clone.querySelector(".picture").src = artwork.primaryImageSmall;
         clone.querySelector(".picture").alt = artwork.title;
+        clone
+            .querySelector(".favorite-button")
+            .setAttribute("data-id", artwork.objectID);
         clone.querySelector(".title").textContent = artwork.title;
         clone.querySelector(".author").textContent = artwork.artistDisplayName;
         clone.querySelector(".year").textContent = artwork.objectDate;
         fragment.appendChild(clone);
     }
     document.querySelector(".container-artworks").appendChild(fragment);
+    favEvent(artworks);
 }
