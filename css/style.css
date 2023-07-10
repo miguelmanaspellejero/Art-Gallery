@@ -33,7 +33,6 @@ main {
 
 .filled {
     font-variation-settings: "FILL" 1;
-    color: var(--color-accent);
 }
 
 html {
@@ -49,6 +48,7 @@ h1 {
     background-color: var(--color-background);
     position: sticky;
     top: 0;
+    z-index: 1;
     height: 4rem;
     display: flex;
     align-items: center;
@@ -57,13 +57,17 @@ h1 {
     border-bottom: 1px solid #000;
 }
 
+.header-title span {
+    color: var(--color-accent);
+}
+
 .container-search {
     display: flex;
     align-items: center;
     justify-content: space-between;
     border: 1px solid #000;
     height: 2.5rem;
-    width: 45rch;
+    width: 30rem;
     border-radius: 2rem;
     padding: 0 1.5rem;
 }
@@ -109,7 +113,7 @@ h1 {
 .status-message {
     font-size: 1.2rem;
     font-family: var(--font-sans);
-    margin-right: 2rch;
+    margin-right: 1rem;
 }
 
 .spinner {
@@ -120,7 +124,6 @@ h1 {
     width: 1rem;
     height: 1rem;
     animation: spin 1s linear infinite;
-    z-index: -1;
 }
 
 @keyframes spin {
@@ -160,7 +163,7 @@ h1 {
 #button-back {
     display: flex;
     align-items: center;
-    gap: 2rch;
+    gap: 1rem;
     background: none;
     border: none;
     font-size: 1.2rem;
@@ -188,10 +191,40 @@ h1 {
 
 .picture {
     height: 20rem;
-    margin-bottom: 2em;
+}
+
+.artwork-frame {
+    position: relative;
+}
+
+.artwork-frame:hover .favorite-button {
+    visibility: visible;
+}
+
+.favorite-button {
+    visibility: hidden;
+    position: absolute;
+    background-color: transparent;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    width: 2rem;
+    height: 2rem;
+    transition: none;
+}
+
+.favorite-button span {
+    font-size: 1.75rem;
+    color: #fff;
+    -webkit-text-stroke: 1.5px #000;
 }
 
 .information {
+    margin-top: 2rem;
     height: 7.5rem;
     width: 66%;
     display: flex;

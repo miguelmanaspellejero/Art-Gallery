@@ -15,7 +15,7 @@
     </head>
     <body>
         <header class="header-top">
-            <a href="#top">
+            <a class="header-title" href="#top">
                 <h1>
                     <span class="material-symbols-outlined filled">
                         palette
@@ -53,9 +53,16 @@
     </body>
     <template id="artworks">
         <div class="artwork">
-            <a class="detail-link">
-                <img class="picture" loading="lazy" />
-            </a>
+            <div class="artwork-frame">
+                <a class="detail-link">
+                    <img class="picture" loading="lazy" />
+                </a>
+                <button class="favorite-button" title="Add favorite">
+                    <span class="material-symbols-outlined filled"
+                        >favorite</span
+                    >
+                </button>
+            </div>
             <div class="information">
                 <p class="title"></p>
                 <p class="author"></p>
