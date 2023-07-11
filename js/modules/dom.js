@@ -28,14 +28,14 @@ export async function printArtworks(artworks) {
         clone.querySelector(
             ".detail-link"
         ).href = `detail.html?id=${artwork.id}`;
-        clone.querySelector(".picture").src = artwork.image;
-        clone.querySelector(".picture").alt = artwork.title;
+        clone.querySelector(".image").src = artwork.image;
+        clone.querySelector(".image").alt = artwork.title;
         clone
             .querySelector(".favorite-button")
             .setAttribute("data-id", artwork.id);
         clone.querySelector(".title").textContent = artwork.title;
-        clone.querySelector(".author").textContent = artwork.artist;
-        clone.querySelector(".year").textContent = artwork.date;
+        clone.querySelector(".artist").textContent = artwork.artist;
+        clone.querySelector(".date").textContent = artwork.date;
         fragment.appendChild(clone);
     }
     document.querySelector(".container-artworks").appendChild(fragment);

@@ -38,12 +38,49 @@
                 >
                     <span class="material-symbols-outlined">search</span>
                 </button>
+                <select class="search-select">
+                    <option value="">All</option>
+                    <option value="title">Title</option>
+                    <option value="artist-culture">Artist or Culture</option>
+                </select>
+            </div>
+            <div class="container-favorite-theme">
+                <a class="link-favorites">
+                    <span class="material-symbols-outlined">favorite</span
+                    >Favorites</a
+                >
+                <button class="button-theme">
+                    <span class="material-symbols-outlined">light_mode</span>
+                </button>
             </div>
         </header>
         <main>
-            <div class="container-status">
-                <span class="status-message"></span>
-                <div class="spinner"></div>
+            <div class="container-status-filter">
+                <div class="container-status">
+                    <span class="status-message"></span>
+                    <div class="spinner"></div>
+                </div>
+                <div class="container-filter">
+                    <label
+                        ><span>Filter by</span
+                        ><input type="checkbox" />Highlights</label
+                    >
+                    <label
+                        >Sort by<select class="sort-select" name="sort">
+                            <option value="relevance" selected>
+                                Relevance
+                            </option>
+                            <option value="title">Title (A-Z)</option>
+                            <option value="title-reverse">Title (Z-A)</option>
+                            <option value="author">Author (A-Z)</option>
+                            <option value="author-reverse">Author (Z-A)</option>
+                            <option value="date">Date (Old to New)</option>
+                            <option value="date-reverse">
+                                Date (New to Old)
+                            </option>
+                        </select></label
+                    >
+                </div>
             </div>
             <div class="container-artworks"></div>
             <div class="loader"></div>
@@ -51,9 +88,9 @@
     </body>
     <template id="artworks">
         <div class="artwork">
-            <div class="artwork-frame">
+            <div class="image-frame">
                 <a class="detail-link">
-                    <img class="picture" loading="lazy" />
+                    <img class="image" loading="lazy" />
                 </a>
                 <button class="favorite-button" title="Add favorite">
                     <span class="material-symbols-outlined">favorite</span>
@@ -61,8 +98,8 @@
             </div>
             <div class="information">
                 <p class="title"></p>
-                <p class="author"></p>
-                <p class="year"></p>
+                <p class="artist"></p>
+                <p class="date"></p>
             </div>
         </div>
     </template>

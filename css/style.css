@@ -1,3 +1,5 @@
+/* || Variables, reset and general rules  */
+
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display&family=Vollkorn&family=Work+Sans&display=swap");
 
 :root {
@@ -5,9 +7,11 @@
     --font-serif: "Vollkorn", serif;
     --font-sans: "Work Sans", sans-serif;
     --color-accent: #7030ff;
-    --color-favorite: #ff3070;
+    --color-favorite: #ff2e54;
     --color-background: #f0f0f0;
+    --color-secondary: #d0ccd8;
     --color-text: #101010;
+    --shadow-glow: 0 0 0.5rem 0.25rem;
 }
 
 * {
@@ -41,6 +45,24 @@ h1 {
     font-family: var(--font-display);
 }
 
+input,
+select,
+button {
+    border: none;
+    background: none;
+}
+
+button {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    transition: none;
+}
+
+/* || Header */
+
 .header-top {
     background-color: var(--color-background);
     position: sticky;
@@ -51,7 +73,13 @@ h1 {
     align-items: center;
     justify-content: space-between;
     padding: 0 3rem;
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid;
+}
+
+/* Logo and title */
+
+.header-title {
+    width: 12rem;
 }
 
 .header-title span {
@@ -59,25 +87,24 @@ h1 {
     font-variation-settings: "FILL" 1;
 }
 
+/* Search box */
+
 .container-search {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border: 1px solid #000;
+    border: 1px solid;
     height: 2.5rem;
-    width: 30rem;
+    width: 32rem;
     border-radius: 2rem;
     padding: 0 1.5rem;
 }
 
 .container-search:focus-within {
-    box-shadow: 0 0 0.5rem 0.25rem var(--color-accent);
+    box-shadow: var(--shadow-glow) var(--color-accent);
 }
 
 #search-input {
-    border: none;
-    background-color: transparent;
-    font-family: var(--font-sans);
     font-size: 1.125rem;
     flex-grow: 1;
 }
@@ -87,19 +114,54 @@ h1 {
 }
 
 #search-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    cursor: pointer;
-    background-color: transparent;
-    border-radius: 50%;
     width: 2rem;
     height: 2rem;
 }
 
 #search-button:hover {
-    background-color: rgba(0, 0, 0, 0.15);
+    text-shadow: 0 0 0.5rem var(--color-accent), 0 0 1rem var(--color-accent),
+        0 0 1.5rem var(--color-accent);
+}
+
+#search-button:disabled,
+#search-input:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+#search-button:disabled:hover {
+    background-color: transparent;
+}
+
+.container-search.disabled {
+    border: none;
+    background-color: var(--color-secondary);
+    cursor: default;
+}
+
+/* Favorites link and Theme selector */
+
+.container-favorite-theme {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 12rem;
+}
+
+.link-favorites {
+    font-size: 1.125rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 2rem;
+}
+
+/* || Status and filters Row */
+
+.container-status-filter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .container-status {
@@ -110,10 +172,10 @@ h1 {
 
 .status-message {
     font-size: 1.2rem;
-    font-family: var(--font-sans);
     margin-right: 1rem;
 }
 
+/* || Loading placeholders and animations */
 .spinner {
     display: none;
     border: 2px solid var(--color-accent);
@@ -154,24 +216,7 @@ h1 {
     }
 }
 
-.container-back {
-    margin: 2rem 0;
-}
-
-#button-back {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    background: none;
-    border: none;
-    font-size: 1.2rem;
-    font-family: var(--font-sans);
-    user-select: none;
-}
-
-#button-back:hover {
-    cursor: pointer;
-}
+/* || Artworks results */
 
 .container-artworks {
     display: flex;
@@ -187,32 +232,24 @@ h1 {
     align-items: center;
 }
 
-.picture {
-    height: 20rem;
-}
-
-.artwork-frame {
+.image-frame {
     position: relative;
 }
 
-.artwork-frame:hover .favorite-button {
+.image-frame:hover .favorite-button {
     visibility: visible;
+}
+.image {
+    height: 20rem;
 }
 
 .favorite-button {
     visibility: hidden;
     position: absolute;
-    background-color: transparent;
     bottom: 0.5rem;
     right: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    cursor: pointer;
     width: 2rem;
     height: 2rem;
-    transition: none;
 }
 
 .favorite-button:hover span {
@@ -240,45 +277,32 @@ h1 {
     flex-direction: column;
     justify-content: space-between;
     text-align: center;
+    font-family: var(--font-serif);
 }
 
 .title {
-    font-family: var(--font-serif);
     font-style: italic;
     font-size: 1.2em;
 }
 
-.author {
-    font-family: var(--font-serif);
+.artist {
     font-weight: bold;
 }
 
-.year {
+.date {
     font-family: var(--font-sans);
 }
 
-.display-flex {
-    display: flex;
+/* || Detail View */
+
+.container-back {
+    margin: 2rem 0;
 }
 
-.visibility-visible {
-    visibility: visible;
-}
-
-#search-button:disabled,
-#search-input:disabled {
-    opacity: 0.3;
-    cursor: default;
-}
-
-#search-button:disabled:hover {
-    background-color: transparent;
-}
-
-.container-search.disabled {
-    border: none;
-    background-color: rgba(0, 0, 0, 0.15);
-    cursor: default;
+#button-back {
+    gap: 1rem;
+    font-size: 1.2rem;
+    font-family: var(--font-sans);
 }
 
 .container-detail {
@@ -300,4 +324,14 @@ h1 {
 .detail-info h2 {
     font-family: var(--font-serif);
     text-align: center;
+}
+
+/* || Utility classes */
+
+.display-flex {
+    display: flex;
+}
+
+.visibility-visible {
+    visibility: visible;
 }

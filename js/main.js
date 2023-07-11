@@ -94,7 +94,7 @@ export function favEvent(artworks) {
             }
             const id = +e.target.parentNode.getAttribute("data-id");
             for (const artwork of artworks) {
-                if (artwork.objectID === id) {
+                if (artwork.id === id) {
                     favList.push(artwork);
                 }
             }

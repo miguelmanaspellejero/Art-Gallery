@@ -35,7 +35,6 @@ export async function fetchData(entries) {
             );
         }
     }
-    console.log(results);
     saveResults();
 }
 
