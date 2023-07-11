@@ -68,7 +68,7 @@ function clearContent() {
 // print restored array from localStorage
 function restoreContent() {
     printArtworks(loadResults());
-    results.push(loadResults());
+    // results.push(loadResults());
 }
 
 // show previous status

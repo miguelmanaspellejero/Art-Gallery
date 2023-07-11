@@ -1,3 +1,5 @@
+import { Artwork } from "./data.js";
+
 export const results = [];
 
 //  function to get array of ID results from search.
@@ -19,9 +21,21 @@ export async function fetchData(entries) {
         const response = await fetch(info);
         const data = await response.json();
         if (data.isPublicDomain) {
-            results.push(data);
+            results.push(
+                new Artwork(
+                    data.objectID,
+                    data.primaryImageSmall,
+                    data.title,
+                    data.artistDisplayName,
+                    data.artistAlphaSort,
+                    data.objectDate,
+                    data.objectEndDate,
+                    data.isHighlight
+                )
+            );
         }
     }
+    console.log(results);
     saveResults();
 }
 
