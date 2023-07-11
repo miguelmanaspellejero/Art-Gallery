@@ -86,6 +86,7 @@ export function favEvent(artworks) {
     const favButtons = document.querySelectorAll(".favorite-button");
     for (const favButton of favButtons) {
         favButton.addEventListener("click", (e) => {
+            e.target.classList.toggle("favorite-clicked");
             const id = +e.target.parentNode.getAttribute("data-id");
             for (const artwork of artworks) {
                 if (artwork.objectID === id) {

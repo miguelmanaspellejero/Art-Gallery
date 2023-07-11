@@ -32,10 +32,6 @@ main {
     user-select: none;
 }
 
-.filled {
-    font-variation-settings: "FILL" 1;
-}
-
 html {
     /* color-scheme: light dark; */
     background-color: var(--color-background);
@@ -60,6 +56,7 @@ h1 {
 
 .header-title span {
     color: var(--color-accent);
+    font-variation-settings: "FILL" 1;
 }
 
 .container-search {
@@ -219,14 +216,20 @@ h1 {
 }
 
 .favorite-button:hover span {
-    text-shadow: 0 0 0.5rem var(--color-favorite);
-    -webkit-text-stroke: 1.5px var(--color-favorite);
+    text-shadow: 0 0 0.5rem var(--color-favorite),
+        0 0 1rem var(--color-favorite), 0 0 1.5rem var(--color-favorite);
 }
 
 .favorite-button span {
+    font-variation-settings: "FILL" 1;
     font-size: 1.75rem;
     color: #fff;
     -webkit-text-stroke: 1.5px #000;
+}
+
+.favorite-button span.favorite-clicked {
+    visibility: visible;
+    color: var(--color-favorite);
 }
 
 .information {
