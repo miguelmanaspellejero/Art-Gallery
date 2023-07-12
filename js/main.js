@@ -54,8 +54,12 @@ function limitSearches(value) {
     document
         .querySelector(".container-search")
         .classList.toggle("disabled", searchRunning);
+    document
+        .querySelector(".container-sort")
+        .classList.toggle("display-none", searchRunning);
     document.querySelector("#search-button").disabled = value;
     document.querySelector("#search-input").disabled = value;
+    document.querySelector("#search-select").disabled = value;
 }
 
 // Clear previous loaded content when a new search is made
