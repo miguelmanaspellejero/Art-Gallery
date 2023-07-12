@@ -4,9 +4,11 @@ export const results = [];
 
 //  function to get array of ID results from search.
 export async function fetchIds(query) {
-    // API url for searches. Only search ones that have images and are highlight. This gives a list of IDs.
-    const searchUrl =
-        "https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&isHighlight=true&q=";
+    // API url for searches. This gives a list of IDs. Only search paintings that have images and are highlight to reduce loading time.
+    const medium = "medium=Paintings";
+    const hasImages = "hasImages=true";
+    const isHighlight = "isHighlight=true";
+    const searchUrl = `https://collectionapi.metmuseum.org/public/collection/v1/search?${medium}&${hasImages}&${isHighlight}&q=`;
     const response = await fetch(searchUrl + query);
     const entries = await response.json();
     return entries;
@@ -29,8 +31,7 @@ export async function fetchData(entries) {
                     data.artistDisplayName,
                     data.artistAlphaSort,
                     data.objectDate,
-                    data.objectEndDate,
-                    data.isHighlight
+                    data.objectEndDate
                 )
             );
         }
