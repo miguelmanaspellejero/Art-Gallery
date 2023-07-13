@@ -199,10 +199,34 @@ select {
 .container-sort {
     display: flex;
     align-items: center;
+    gap: 3rem;
 }
 
 #sort-select {
     font-size: 1.2rem;
+}
+
+.container-checkbox {
+    display: flex;
+    align-items: center;
+}
+
+#highlight-checkbox {
+    cursor: pointer;
+    appearance: none;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    border: 1px solid var(--color-text);
+}
+
+#highlight-checkbox:checked {
+    background-color: var(--color-accent);
+}
+
+#highlight-label {
+    cursor: pointer;
+    margin-left: 0.5rem;
 }
 
 /* || Loading placeholders and animations */

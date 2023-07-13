@@ -1,5 +1,14 @@
 export class Artwork {
-    constructor(id, image, title, artist, artistSort, date, dateSort) {
+    constructor(
+        id,
+        image,
+        title,
+        artist,
+        artistSort,
+        date,
+        dateSort,
+        highlight
+    ) {
         this.id = id;
         this.image = image;
         this.title = title;
@@ -7,6 +16,7 @@ export class Artwork {
         this.artistSort = artistSort;
         this.date = date;
         this.dateSort = dateSort;
+        this.highlight = this.highlight;
     }
     /*
     // Add support for fetching other APIs:

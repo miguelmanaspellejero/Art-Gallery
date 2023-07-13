@@ -22,18 +22,19 @@ document.querySelector("#search-input").addEventListener("keydown", (e) => {
 // Start search query from input
 function startSearch() {
     const query = document.querySelector("#search-input").value;
+    const filter = document.querySelector("#search-select").value;
     if (searchRunning === false && query.length > 0) {
         clearContent();
-        controlSearchProcess(query);
+        controlSearchProcess(query, filter);
     }
 }
 
 //Control search functions process
 
-async function controlSearchProcess(query) {
+async function controlSearchProcess(query, filter) {
     limitSearches(true);
     showSearchStatus(query, "loading");
-    const entries = await fetchIds(query);
+    const entries = await fetchIds(query, filter);
     if (entries.objectIDs === null) {
         showSearchStatus(query, "notFound");
         saveQueryAndStatus();
