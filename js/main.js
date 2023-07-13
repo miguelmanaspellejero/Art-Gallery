@@ -21,7 +21,7 @@ document.querySelector("#search-input").addEventListener("keydown", (e) => {
 
 // Start search query from input
 function startSearch() {
-    const query = document.querySelector("#search-input").value;
+    const query = document.querySelector("#search-input").value.trim();
     const filter = document.querySelector("#search-select").value;
     if (searchRunning === false && query.length > 0) {
         clearContent();
@@ -55,9 +55,6 @@ function limitSearches(value) {
     document
         .querySelector(".container-search")
         .classList.toggle("disabled", searchRunning);
-    document
-        .querySelector(".container-sort")
-        .classList.toggle("display-none", searchRunning);
     document.querySelector("#search-button").disabled = value;
     document.querySelector("#search-input").disabled = value;
     document.querySelector("#search-select").disabled = value;
@@ -73,7 +70,7 @@ function clearContent() {
 // print restored array from localStorage
 function restoreContent() {
     printArtworks(loadResults());
-    // results.push(loadResults());
+    results.push(loadResults());
 }
 
 // show previous status
@@ -82,9 +79,20 @@ function restoreQueryAndStatus() {
         loadQueryAndStatus();
 }
 
-// Call them only from other pages when turning back?
-restoreContent();
-restoreQueryAndStatus();
+// Restore only when there's something in storage
+
+if (localStorage.getItem("savedResults")) {
+    restoreContent();
+}
+if (localStorage.getItem("statusMessage")) {
+    restoreQueryAndStatus();
+    // Make filter and sort options visible only when status showed results
+    if (localStorage.getItem("statusMessage").startsWith("Showing")) {
+        document
+            .querySelector(".container-sort")
+            .classList.add("visibility-visible");
+    }
+}
 
 export function favEvent(artworks) {
     const favList = [];
@@ -97,7 +105,7 @@ export function favEvent(artworks) {
             } else {
                 e.target.title = "Add favorite";
             }
-            const id = +e.target.parentNode.getAttribute("data-id");
+            const id = +e.target.parentNode.dataset.id;
             for (const artwork of artworks) {
                 if (artwork.id === id) {
                     favList.push(artwork);

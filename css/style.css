@@ -197,6 +197,7 @@ select {
 }
 
 .container-sort {
+    visibility: hidden;
     display: flex;
     align-items: center;
     gap: 3rem;
@@ -391,4 +392,8 @@ select {
 
 .visibility-visible {
     visibility: visible;
+}
+
+.visibility-hidden {
+    visibility: hidden;
 }

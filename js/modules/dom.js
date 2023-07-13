@@ -3,13 +3,22 @@ import { results } from "./fetch.js";
 
 // Update status of the search process and results.
 export function showSearchStatus(query, status) {
-    const statusMessage = document.querySelector(".status-message");
+    // Change display visibility of status elements
+    document
+        .querySelector(".container-sort")
+        .classList.toggle("visibility-visible", status === "finished");
     document
         .querySelector(".spinner")
         .classList.toggle("display-flex", status === "loading");
     document
         .querySelector(".loader")
         .classList.toggle("display-flex", status === "loading");
+    document
+        .querySelector(".container-sort")
+        .classList.toggle("display-flex", status === "finished");
+
+    // Create and print status message;
+    const statusMessage = document.querySelector(".status-message");
     if (status === "loading") {
         statusMessage.textContent = "Loading";
     } else if (status === "finished") {
