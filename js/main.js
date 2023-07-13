@@ -1,6 +1,11 @@
-import { showSearchStatus, printArtworks } from "./modules/dom.js";
+import {
+    showSearchStatus,
+    printArtworks,
+    showAll,
+    showHighlightsOnly,
+} from "./modules/dom.js";
 import { results, fetchIds, fetchData } from "./modules/fetch.js";
-import { saveResults, saveQueryAndStatus } from "./modules/storage.js";
+import { saveResults, saveQuery } from "./modules/storage.js";
 
 let searchRunning = false; // This avoids new searches from being started until current is finished.
 
@@ -40,14 +45,14 @@ async function controlSearchProcess(query, filter) {
         return;
     }
     await printArtworks(results);
-    showSearchStatus(query, "finished");
-    saveQueryAndStatus();
+    showSearchStatus(query, "finished", results);
+    saveQuery(query);
     limitSearches(false);
 }
 
 function interruptSearch(query) {
     showSearchStatus(query, "notFound");
-    saveQueryAndStatus();
+    saveQuery(query);
     saveResults();
     limitSearches(false);
 }
@@ -74,22 +79,11 @@ document
     .querySelector("#highlight-checkbox")
     .addEventListener("change", (e) => {
         if (e.target.checked) {
-            onlyHighlights();
+            showHighlightsOnly();
         } else {
             showAll();
         }
     });
-
-function showAll() {
-    document.querySelector(".container-artworks").replaceChildren();
-    printArtworks(results);
-}
-
-function onlyHighlights() {
-    const highlights = results.filter((item) => item.highlight === true);
-    document.querySelector(".container-artworks").replaceChildren();
-    printArtworks(highlights);
-}
 
 export function favEvent(artworks) {
     const favList = [];

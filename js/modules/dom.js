@@ -1,9 +1,9 @@
 import { favEvent } from "../main.js";
 import { results } from "./fetch.js";
-import { loadResults, loadQueryAndStatus } from "./storage.js";
+import { loadResults, loadQuery } from "./storage.js";
 
 // Update status of the search process and results.
-export function showSearchStatus(query, status) {
+export function showSearchStatus(query, status, results) {
     // Change display visibility of status elements
     document
         .querySelector(".container-sort")
@@ -23,7 +23,10 @@ export function showSearchStatus(query, status) {
     if (status === "loading") {
         statusMessage.textContent = "Loading";
     } else if (status === "finished") {
-        statusMessage.textContent = `Showing ${results.length} results for "${query}"`;
+        statusMessage.textContent =
+            results.length > 1
+                ? `Showing ${results.length} results for "${query}"`
+                : `Showing 1 result for "${query}"`;
     } else if (status === "notFound") {
         statusMessage.textContent = `No results matching "${query}"`;
     }
@@ -60,9 +63,12 @@ function restoreContent() {
 }
 
 // show previous status
-function restoreQueryAndStatus() {
-    document.querySelector(".status-message").textContent =
-        loadQueryAndStatus();
+function restoreQuery() {
+    if (results.length === 0) {
+        showSearchStatus(loadQuery(), "notFound");
+    } else {
+        showSearchStatus(loadQuery(), "finished", results);
+    }
 }
 
 // Restore only when there's something in storage
@@ -70,12 +76,23 @@ function restoreQueryAndStatus() {
 if (localStorage.getItem("savedResults")) {
     restoreContent();
 }
-if (localStorage.getItem("statusMessage")) {
-    restoreQueryAndStatus();
+if (localStorage.getItem("savedQuery")) {
+    restoreQuery();
     // Make filter and sort options visible only when status showed results
-    if (localStorage.getItem("statusMessage").startsWith("Showing")) {
-        document
-            .querySelector(".container-sort")
-            .classList.add("visibility-visible");
-    }
+}
+
+// Filter results
+
+export function showAll() {
+    console.log(results);
+    document.querySelector(".container-artworks").replaceChildren();
+    printArtworks(results);
+    showSearchStatus(loadQuery(), "finished", results);
+}
+
+export function showHighlightsOnly() {
+    const highlights = results.filter((item) => item.highlight === true);
+    document.querySelector(".container-artworks").replaceChildren();
+    printArtworks(highlights);
+    showSearchStatus(loadQuery(), "finished", highlights);
 }
