@@ -16,7 +16,7 @@ export class Artwork {
         this.artistSort = artistSort;
         this.date = date;
         this.dateSort = dateSort;
-        this.highlight = this.highlight;
+        this.highlight = highlight;
     }
     /*
     // Add support for fetching other APIs:
