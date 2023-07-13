@@ -28,17 +28,27 @@ async function controlSearchProcess(query, filter) {
     limitSearches(true);
     showSearchStatus(query, "loading");
     const entries = await fetchIds(query, filter);
+    // Stop search if no results are found
     if (entries.objectIDs === null) {
-        showSearchStatus(query, "notFound");
-        saveQueryAndStatus();
-        saveResults();
-        limitSearches(false);
+        interruptSearch(query);
         return;
     }
     await fetchData(entries);
+    // Stop search if no results are in public domain
+    if (results.length === 0) {
+        interruptSearch(query);
+        return;
+    }
     await printArtworks(results);
     showSearchStatus(query, "finished");
     saveQueryAndStatus();
+    limitSearches(false);
+}
+
+function interruptSearch(query) {
+    showSearchStatus(query, "notFound");
+    saveQueryAndStatus();
+    saveResults();
     limitSearches(false);
 }
 
@@ -58,6 +68,27 @@ function limitSearches(value) {
 function clearContent() {
     results.splice(0);
     document.querySelector(".container-artworks").replaceChildren();
+}
+
+document
+    .querySelector("#highlight-checkbox")
+    .addEventListener("change", (e) => {
+        if (e.target.checked) {
+            onlyHighlights();
+        } else {
+            showAll();
+        }
+    });
+
+function showAll() {
+    document.querySelector(".container-artworks").replaceChildren();
+    printArtworks(results);
+}
+
+function onlyHighlights() {
+    const highlights = results.filter((item) => item.highlight === true);
+    document.querySelector(".container-artworks").replaceChildren();
+    printArtworks(highlights);
 }
 
 export function favEvent(artworks) {

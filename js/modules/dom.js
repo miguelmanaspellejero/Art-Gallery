@@ -54,8 +54,9 @@ export async function printArtworks(artworks) {
 
 // print restored array from localStorage
 function restoreContent() {
-    printArtworks(loadResults());
-    results.push(loadResults());
+    const restoredResults = loadResults();
+    results.push(...restoredResults);
+    printArtworks(results);
 }
 
 // show previous status
