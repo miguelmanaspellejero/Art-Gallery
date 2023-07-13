@@ -1,5 +1,6 @@
 import { favEvent } from "../main.js";
 import { results } from "./fetch.js";
+import { loadResults, loadQueryAndStatus } from "./storage.js";
 
 // Update status of the search process and results.
 export function showSearchStatus(query, status) {
@@ -49,4 +50,31 @@ export async function printArtworks(artworks) {
     }
     document.querySelector(".container-artworks").appendChild(fragment);
     favEvent(artworks);
+}
+
+// print restored array from localStorage
+function restoreContent() {
+    printArtworks(loadResults());
+    results.push(loadResults());
+}
+
+// show previous status
+function restoreQueryAndStatus() {
+    document.querySelector(".status-message").textContent =
+        loadQueryAndStatus();
+}
+
+// Restore only when there's something in storage
+
+if (localStorage.getItem("savedResults")) {
+    restoreContent();
+}
+if (localStorage.getItem("statusMessage")) {
+    restoreQueryAndStatus();
+    // Make filter and sort options visible only when status showed results
+    if (localStorage.getItem("statusMessage").startsWith("Showing")) {
+        document
+            .querySelector(".container-sort")
+            .classList.add("visibility-visible");
+    }
 }

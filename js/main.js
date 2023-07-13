@@ -1,13 +1,6 @@
 import { showSearchStatus, printArtworks } from "./modules/dom.js";
-import {
-    results,
-    fetchIds,
-    fetchData,
-    saveResults,
-    loadResults,
-    saveQueryAndStatus,
-    loadQueryAndStatus,
-} from "./modules/fetch.js";
+import { results, fetchIds, fetchData } from "./modules/fetch.js";
+import { saveResults, saveQueryAndStatus } from "./modules/storage.js";
 
 let searchRunning = false; // This avoids new searches from being started until current is finished.
 
@@ -65,33 +58,6 @@ function limitSearches(value) {
 function clearContent() {
     results.splice(0);
     document.querySelector(".container-artworks").replaceChildren();
-}
-
-// print restored array from localStorage
-function restoreContent() {
-    printArtworks(loadResults());
-    results.push(loadResults());
-}
-
-// show previous status
-function restoreQueryAndStatus() {
-    document.querySelector(".status-message").textContent =
-        loadQueryAndStatus();
-}
-
-// Restore only when there's something in storage
-
-if (localStorage.getItem("savedResults")) {
-    restoreContent();
-}
-if (localStorage.getItem("statusMessage")) {
-    restoreQueryAndStatus();
-    // Make filter and sort options visible only when status showed results
-    if (localStorage.getItem("statusMessage").startsWith("Showing")) {
-        document
-            .querySelector(".container-sort")
-            .classList.add("visibility-visible");
-    }
 }
 
 export function favEvent(artworks) {
