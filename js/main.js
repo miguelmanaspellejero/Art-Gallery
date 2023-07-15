@@ -30,6 +30,8 @@ function startSearch() {
 //Control search functions process
 
 async function controlSearchProcess(query, filter) {
+    //Uncheck filter
+    document.querySelector("#highlight-checkbox").checked = false;
     limitSearches(true);
     showSearchStatus(query, "loading");
     const entries = await fetchIds(query, filter);
@@ -75,6 +77,7 @@ function clearContent() {
     document.querySelector(".container-artworks").replaceChildren();
 }
 
+// Filter by highlights event
 document
     .querySelector("#highlight-checkbox")
     .addEventListener("change", (e) => {
