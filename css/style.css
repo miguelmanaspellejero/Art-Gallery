@@ -1,4 +1,4 @@
-/* || Variables, reset and general rules  */
+/*#region || Variables, reset and general rules  */
 
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display&family=Vollkorn&family=Work+Sans&display=swap");
 
@@ -69,7 +69,9 @@ select {
     cursor: pointer;
 }
 
-/* || Header */
+/*#endregion  */
+
+/*#region || Header */
 
 .header-top {
     background-color: var(--color-background);
@@ -177,7 +179,9 @@ select {
         0 0 1.5rem var(--color-accent);
 }
 
-/* || Status and sorting row */
+/*#endregion  */
+
+/*#region || Status and sorting row */
 
 .container-status-sort {
     display: flex;
@@ -230,7 +234,9 @@ select {
     margin-left: 0.5rem;
 }
 
-/* || Loading placeholders and animations */
+/*#endregion  */
+
+/* #region || Loading placeholders and animations */
 .spinner {
     display: none;
     border: 2px solid var(--color-accent);
@@ -271,7 +277,9 @@ select {
     }
 }
 
-/* || Artworks results */
+/*#endregion  */
+
+/*#region || Artworks results */
 
 .container-artworks {
     display: flex;
@@ -346,7 +354,9 @@ select {
     font-family: var(--font-sans);
 }
 
-/* || Detail View */
+/*#endregion  */
+
+/*#region || Detail View */
 
 .container-back {
     margin: 2rem 0;
@@ -380,7 +390,9 @@ select {
     text-align: center;
 }
 
-/* || Utility classes */
+/*#endregion  */
+
+/*#region || Utility classes */
 
 .display-flex {
     display: flex;
@@ -397,3 +409,4 @@ select {
 .visibility-hidden {
     visibility: hidden;
 }
+/*#endregion  */
