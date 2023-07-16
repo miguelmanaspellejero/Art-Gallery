@@ -29,7 +29,7 @@ a {
 }
 
 main {
-    margin: 2rem;
+    margin: 0 5rem 1rem 5rem;
 }
 
 .material-symbols-outlined {
@@ -187,7 +187,7 @@ select {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 1rem 0;
+    margin: 2.5rem 0 4rem 0;
     font-size: 1.2rem;
 }
 
@@ -282,35 +282,76 @@ select {
 /*#region || Artworks results */
 
 .container-artworks {
+    columns: 4 20rem;
+    column-gap: 1rem;
+    overflow: auto;
+}
+
+.container-artworks.sorting {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    gap: 1rem;
 }
 
 .artwork {
-    padding: 1rem;
-    margin: 1rem;
+    position: relative;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    margin-bottom: 1rem;
 }
 
-.image-frame {
-    position: relative;
+.artwork.sorting {
+    margin-bottom: 0;
 }
 
-.image-frame:hover .favorite-button {
-    visibility: visible;
-}
 .image {
+    display: block;
+    width: 100%;
+}
+
+.image.sorting {
+    display: flex;
+    width: auto;
     height: 20rem;
+}
+
+.artwork-overlay {
+    cursor: zoom-in;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.5rem;
+    opacity: 0;
+}
+
+.artwork-overlay:hover {
+    opacity: 1;
+}
+
+.artwork-overlay p {
+    cursor: text;
+    color: #f0f0f0;
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    text-shadow: 1px 1px 3px #101010;
 }
 
 .favorite-button {
     visibility: hidden;
+    z-index: 1;
     position: absolute;
-    bottom: 0.5rem;
-    right: 0.5rem;
+    right: 1.5rem;
+    bottom: 2.25rem;
+}
+
+.artwork:hover .favorite-button {
+    visibility: visible;
 }
 
 .favorite-button:hover span {
@@ -321,8 +362,8 @@ select {
 .favorite-button span {
     font-variation-settings: "FILL" 1;
     font-size: 1.75rem;
-    color: #fff;
-    -webkit-text-stroke: 1.5px #000;
+    color: #f0f0f0;
+    -webkit-text-stroke: 1.5px #101010;
 }
 
 .favorite-button span.favorite-clicked {
@@ -330,28 +371,18 @@ select {
     color: var(--color-favorite);
 }
 
-.information {
-    margin-top: 2rem;
-    height: 7.5rem;
-    width: 66%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    text-align: center;
-    font-family: var(--font-serif);
-}
-
 .title {
     font-style: italic;
-    font-size: 1.2em;
 }
 
-.artist {
-    font-weight: bold;
+.image-footer {
+    max-width: 75%;
 }
 
-.date {
+.image-footer .date {
     font-family: var(--font-sans);
+    font-size: 1rem;
+    margin-top: 0.5rem;
 }
 
 /*#endregion  */

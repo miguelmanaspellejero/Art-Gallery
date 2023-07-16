@@ -85,25 +85,25 @@
                     </div>
                 </div>
             </div>
-            <div class="container-artworks"></div>
             <div class="loader"></div>
+            <div class="container-artworks"></div>
         </main>
     </body>
     <template id="artworks">
         <div class="artwork">
-            <div class="image-frame">
-                <a class="detail-link">
-                    <img class="image" loading="lazy" />
-                </a>
-                <button class="favorite-button" title="Add favorite">
-                    <span class="material-symbols-outlined">favorite</span>
-                </button>
-            </div>
-            <div class="information">
-                <p class="title"></p>
-                <p class="artist"></p>
-                <p class="date"></p>
-            </div>
+            <a class="detail-link">
+                <img class="image" loading="lazy" />
+                <div class="artwork-overlay">
+                    <p class="title"></p>
+                    <div class="image-footer">
+                        <p class="artist"></p>
+                        <p class="date"></p>
+                    </div>
+                </div>
+            </a>
+            <button class="favorite-button" title="Add favorite">
+                <span class="material-symbols-outlined">favorite</span>
+            </button>
         </div>
     </template>
 </html>
