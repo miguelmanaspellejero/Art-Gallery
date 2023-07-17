@@ -1,0 +1,103 @@
+<!-- Header Template  -->
+<template id="header">
+    <header class="header-top">
+        <a class="header-title" href="index.html">
+            <h1>
+                <span class="material-symbols-outlined"> palette </span>
+                Art Gallery
+            </h1>
+        </a>
+        <div class="container-search">
+            <input
+                id="search-input"
+                type="text"
+                name="q"
+                placeholder="Search"
+                aria-label="search"
+                spellcheck="false"
+                autocomplete="off"
+            />
+            <select id="search-select">
+                <option value="">All</option>
+                <option value="title=true">Title</option>
+                <option value="artistOrCulture=true">Artist</option>
+            </select>
+            <button id="search-button" type="submit" aria-label="submit search">
+                <span class="material-symbols-outlined">search</span>
+            </button>
+        </div>
+        <div class="container-favorite-theme">
+            <a class="link-favorites" href="favorites.html">
+                <span class="material-symbols-outlined">favorite</span
+                >Favorites</a
+            >
+            <button class="button-round" title="Toggle Theme">
+                <span class="material-symbols-outlined">light_mode</span>
+            </button>
+        </div>
+    </header>
+</template>
+
+<!-- Status Bar -->
+<template id="status-bar">
+    <div class="container-status">
+        <span class="status-message"></span>
+        <div class="spinner"></div>
+    </div>
+    <div class="container-sort">
+        <div>
+            <label for="sort-select">Sort by</label>
+            <select id="sort-select" name="sort">
+                <option value="relevance" selected>Relevance</option>
+                <option value="title">Title (A-Z)</option>
+                <option value="title-reverse">Title (Z-A)</option>
+                <option value="author">Author (A-Z)</option>
+                <option value="author-reverse">Author (Z-A)</option>
+                <option value="date">Date (Old to New)</option>
+                <option value="date-reverse">Date (New to Old)</option>
+            </select>
+        </div>
+        <div class="container-checkbox">
+            <input id="highlight-checkbox" type="checkbox" />
+            <label for="highlight-checkbox" id="highlight-label"
+                >Highlights only</label
+            >
+        </div>
+    </div>
+</template>
+
+<!-- Artworks -->
+
+<template id="artworks">
+    <div class="artwork">
+        <a class="detail-link">
+            <img class="image" loading="lazy" />
+            <div class="artwork-overlay">
+                <p class="title"></p>
+                <div class="image-footer">
+                    <p class="artist"></p>
+                    <p class="date"></p>
+                </div>
+            </div>
+        </a>
+        <button class="favorite-button" title="Add favorite">
+            <span class="material-symbols-outlined">favorite</span>
+        </button>
+    </div>
+</template>
+
+<!-- Footer -->
+
+<template id="footer">
+    <span>Miguel Mañas. 2023. </span> <br />
+    This website is powered by the
+    <a href="https://metmuseum.github.io/"
+        >The Metropolitan Museum of Art Collection API</a
+    >.
+    <br />
+    All data and images are in the
+    <a
+        href="https://www.metmuseum.org/about-the-met/policies-and-documents/open-access"
+        >public domain</a
+    >.
+</template>
