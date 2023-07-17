@@ -1,41 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+
 <!-- Header Template  -->
 <template id="header">
-    <header class="header-top">
-        <a class="header-title" href="index.html">
-            <h1>
-                <span class="material-symbols-outlined"> palette </span>
-                Art Gallery
-            </h1>
-        </a>
-        <div class="container-search">
-            <input
-                id="search-input"
-                type="text"
-                name="q"
-                placeholder="Search"
-                aria-label="search"
-                spellcheck="false"
-                autocomplete="off"
-            />
-            <select id="search-select">
-                <option value="">All</option>
-                <option value="title=true">Title</option>
-                <option value="artistOrCulture=true">Artist</option>
-            </select>
-            <button id="search-button" type="submit" aria-label="submit search">
-                <span class="material-symbols-outlined">search</span>
-            </button>
-        </div>
-        <div class="container-favorite-theme">
-            <a class="link-favorites" href="favorites.html">
-                <span class="material-symbols-outlined">favorite</span
-                >Favorites</a
-            >
-            <button class="button-round" title="Toggle Theme">
-                <span class="material-symbols-outlined">light_mode</span>
-            </button>
-        </div>
-    </header>
+    <a class="header-title" href="index.html">
+        <h1>
+            <span class="material-symbols-outlined"> palette </span>
+            Art Gallery
+        </h1>
+    </a>
+    <div class="container-search">
+        <input
+            id="search-input"
+            type="text"
+            name="q"
+            placeholder="Search"
+            aria-label="search"
+            spellcheck="false"
+            autocomplete="off"
+        />
+        <select id="search-select">
+            <option value="">All</option>
+            <option value="title=true">Title</option>
+            <option value="artistOrCulture=true">Artist</option>
+        </select>
+        <button id="search-button" type="submit" aria-label="submit search">
+            <span class="material-symbols-outlined">search</span>
+        </button>
+    </div>
+    <div class="container-favorite-theme">
+        <a class="link-favorites" href="favorites.html">
+            <span class="material-symbols-outlined">favorite</span>Favorites</a
+        >
+        <button class="button-round" title="Toggle Theme">
+            <span class="material-symbols-outlined">light_mode</span>
+        </button>
+    </div>
 </template>
 
 <!-- Status Bar -->

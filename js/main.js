@@ -6,6 +6,9 @@ import {
 } from "./modules/dom.js";
 import { results, fetchIds, fetchData } from "./modules/fetch.js";
 import { saveResults, saveQuery } from "./modules/storage.js";
+import { printHeaderAndFooter } from "./modules/templates.js";
+
+await printHeaderAndFooter();
 
 // Back to top button:
 
