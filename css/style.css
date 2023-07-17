@@ -466,12 +466,17 @@ footer a {
     z-index: 1;
     display: grid;
     place-items: center;
+    gap: 2rem;
+    padding-bottom: 2rem;
 }
 .container-landing h1 {
+    height: 10%;
+    letter-spacing: 0.3rem;
     user-select: none;
     color: #f0f0f0;
-    font-size: 4rem;
+    font-size: calc(2.5rem + 2vw);
     text-shadow: var(--shadow-text);
+    text-align: center;
 }
 
 .container-landing h1 span {
@@ -495,16 +500,22 @@ footer a {
     height: 100vh;
     width: 100%;
     z-index: -1;
-    background: url("https://images.metmuseum.org/CRDImages/ad/original/DT1545.jpg")
-        center center / cover no-repeat;
+    background: var(--color-background) center center / cover no-repeat;
     filter: brightness(0.5);
 }
 
 .container-search.landing-search {
     background-color: var(--color-background);
-    width: 50%;
+    height: 3rem;
+    width: 50vw;
     min-width: 20rem;
     box-shadow: 1px 1px 3px #101010;
+}
+
+@media (max-width: 768px) {
+    .container-search.landing-search button {
+        display: none;
+    }
 }
 
 /*#endregion */
