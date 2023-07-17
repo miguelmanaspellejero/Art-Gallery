@@ -13,6 +13,7 @@
     --color-disabled: #d0ccd8;
     --color-text: #101010;
     --shadow-glow: 0 0 0.5rem 0.25rem;
+    --shadow-text: 1px 1px 3px #101010;
 }
 
 * {
@@ -40,6 +41,7 @@ main {
 html {
     /* color-scheme: light dark; */
     background-color: var(--color-background);
+    scroll-behavior: smooth;
 }
 
 h1 {
@@ -339,7 +341,7 @@ select {
     color: #f0f0f0;
     font-family: var(--font-serif);
     font-size: 1.2rem;
-    text-shadow: 1px 1px 3px #101010;
+    text-shadow: var(--shadow-text);
 }
 
 .favorite-button {
@@ -407,7 +409,7 @@ footer a {
 
 /*#endregion */
 
-/*region || Back to top*/
+/*#region || Back to top*/
 .back-to-top {
     display: none;
     position: sticky;
@@ -454,6 +456,58 @@ footer a {
 }
 
 /*#endregion  */
+
+/*#region || Landing Page */
+
+.container-landing {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+}
+.container-landing h1 {
+    user-select: none;
+    color: #f0f0f0;
+    font-size: 4rem;
+    text-shadow: var(--shadow-text);
+}
+
+.container-landing h1 span {
+    font-variation-settings: "FILL" 1;
+    font-size: 3rem;
+    color: #f0f0f0;
+}
+
+.container-landing p {
+    text-align: center;
+    max-width: 50%;
+    color: #f0f0f0;
+    font-size: 1.5rem;
+    text-shadow: var(--shadow-text);
+}
+
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    z-index: -1;
+    background: url("https://images.metmuseum.org/CRDImages/ad/original/DT1545.jpg")
+        center center / cover no-repeat;
+    filter: brightness(0.5);
+}
+
+.container-search.landing-search {
+    background-color: var(--color-background);
+    width: 50%;
+    min-width: 20rem;
+    box-shadow: 1px 1px 3px #101010;
+}
+
+/*#endregion */
 
 /*#region || Utility classes */
 

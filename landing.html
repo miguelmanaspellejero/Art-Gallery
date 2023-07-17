@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="author" content="Miguel Mañas" />
+        <script src="js/landing.js" type="module"></script>
+        <link rel="stylesheet" href="css/style.css" />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        />
+        <title>Art Gallery</title>
+    </head>
+    <body>
+        <div class="container-landing">
+            <h1 class="landing-title">
+                <span class="material-symbols-outlined"> palette </span>
+                Art Gallery
+            </h1>
+
+            <div class="container-search landing-search">
+                <input
+                    id="search-input"
+                    type="text"
+                    name="q"
+                    placeholder="Search"
+                    aria-label="search"
+                    spellcheck="false"
+                    autocomplete="off"
+                />
+                <select id="search-select">
+                    <option value="">All</option>
+                    <option value="title=true">Title</option>
+                    <option value="artistOrCulture=true">Artist</option>
+                </select>
+                <button
+                    id="search-button"
+                    type="submit"
+                    aria-label="submit search"
+                >
+                    <span class="material-symbols-outlined">search</span>
+                </button>
+            </div>
+            <p>
+                Discover paintings from the greatest artists in history and save
+                all your favorite masterpieces.
+            </p>
+        </div>
+        <div class="background-image"></div>
+    </body>
+</html>
