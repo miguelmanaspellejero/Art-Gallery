@@ -7,6 +7,14 @@ import {
 import { results, fetchIds, fetchData } from "./modules/fetch.js";
 import { saveResults, saveQuery } from "./modules/storage.js";
 
+// Back to top button:
+
+window.addEventListener("scroll", () => {
+    document
+        .querySelector(".back-to-top")
+        .classList.toggle("display-flex", window.scrollY > 0);
+});
+
 let searchRunning = false; // This avoids new searches from being started until current is finished.
 
 // Click and enter search events
