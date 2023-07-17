@@ -14,8 +14,9 @@
         <title>Art Gallery</title>
     </head>
     <body>
+        <noscript>Please, enable Javascript to run this website</noscript>
         <header class="header-top">
-            <a class="header-title" href="#top">
+            <a class="header-title" href="index.html">
                 <h1>
                     <span class="material-symbols-outlined"> palette </span>
                     Art Gallery
@@ -45,11 +46,11 @@
                 </button>
             </div>
             <div class="container-favorite-theme">
-                <a class="link-favorites">
+                <a class="link-favorites" href="favorites.html">
                     <span class="material-symbols-outlined">favorite</span
                     >Favorites</a
                 >
-                <button class="button-theme">
+                <button class="button-round" title="Toggle Theme">
                     <span class="material-symbols-outlined">light_mode</span>
                 </button>
             </div>
@@ -88,6 +89,24 @@
             <div class="loader"></div>
             <div class="container-artworks"></div>
         </main>
+        <footer>
+            <span>Miguel Mañas. 2023. </span> <br />
+            This website is powered by the
+            <a href="https://metmuseum.github.io/"
+                >The Metropolitan Museum of Art Collection API</a
+            >.
+            <br />
+            All data and images are in the
+            <a
+                href="https://www.metmuseum.org/about-the-met/policies-and-documents/open-access"
+                >public domain</a
+            >.
+        </footer>
+        <a href="#top">
+            <button class="back-to-top button-round">
+                <span class="material-symbols-outlined"> arrow_upward </span>
+            </button>
+        </a>
     </body>
     <template id="artworks">
         <div class="artwork">
