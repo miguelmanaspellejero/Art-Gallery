@@ -308,7 +308,7 @@ select {
     margin-bottom: 1rem;
 }
 
-.artwork.sorting {
+.container-artworks.sorting .artwork {
     margin-bottom: 0;
 }
 
@@ -317,7 +317,7 @@ select {
     width: 100%;
 }
 
-.image.sorting {
+.container-artworks.sorting .image {
     display: flex;
     width: auto;
     height: 20rem;

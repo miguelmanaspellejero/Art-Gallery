@@ -99,6 +99,70 @@ document
         }
     });
 
+// Sorting events and function
+document.querySelector("#sort-select").addEventListener("change", (e) => {
+    const selection = e.target.value;
+    const container = document.querySelector(".container-artworks");
+    container.classList.toggle("sorting", selection !== "relevance");
+    container.replaceChildren();
+
+    if (selection === "relevance") {
+        printArtworks(results);
+    } else if (selection === "title") {
+        printArtworks(
+            [...results].sort((a, b) => {
+                if (a.title < b.title) {
+                    return -1;
+                }
+                if (a.title > b.title) {
+                    return 1;
+                }
+                return 0;
+            })
+        );
+    } else if (selection === "title-reverse") {
+        printArtworks(
+            [...results].sort((a, b) => {
+                if (a.title > b.title) {
+                    return -1;
+                }
+                if (a.title < b.title) {
+                    return 1;
+                }
+                return 0;
+            })
+        );
+    } else if (selection === "artist") {
+        printArtworks(
+            [...results].sort((a, b) => {
+                if (a.artistSort < b.artistSort) {
+                    return -1;
+                }
+                if (a.artistSort > b.artistSort) {
+                    return 1;
+                }
+                return 0;
+            })
+        );
+    } else if (selection === "artist-reverse") {
+        printArtworks(
+            [...results].sort((a, b) => {
+                if (a.artistSort > b.artistSort) {
+                    return -1;
+                }
+                if (a.artistSort < b.artistSort) {
+                    return 1;
+                }
+                return 0;
+            })
+        );
+    } else if (selection === "date") {
+        printArtworks([...results].sort((a, b) => a.dateSort - b.dateSort));
+    } else if (selection === "date-reverse") {
+        printArtworks([...results].sort((a, b) => b.dateSort - a.dateSort));
+    }
+});
+
 export function favEvent(artworks) {
     const favList = [];
     const favButtons = document.querySelectorAll(".favorite-button");
