@@ -35,12 +35,17 @@ export async function fetchData(entries) {
                 new Artwork(
                     data.objectID,
                     data.primaryImageSmall,
+                    data.primaryImage,
                     data.title,
                     data.artistDisplayName,
                     data.artistAlphaSort,
+                    data.artistDisplayBio,
                     data.objectDate,
                     data.objectEndDate,
-                    data.isHighlight
+                    data.isHighlight,
+                    data.department,
+                    data.medium,
+                    data.dimensions
                 )
             );
         }

@@ -1,3 +1,4 @@
+import { Artwork } from "./modules/data.js";
 import { printHeaderAndFooter } from "./modules/templates.js";
 
 await printHeaderAndFooter();
@@ -9,19 +10,40 @@ async function fetchDetails() {
     const objectInfoUrl =
         "https://collectionapi.metmuseum.org/public/collection/v1/objects/";
     const response = await fetch(objectInfoUrl + id);
-    const data = await response.json();
-    printDetails(data);
+    let details = await response.json();
+    details = new Artwork(
+        details.objectID,
+        details.primaryImageSmall,
+        details.primaryImage,
+        details.title,
+        details.artistDisplayName,
+        details.artistAlphaSort,
+        details.artistDisplayBio,
+        details.objectDate,
+        details.objectEndDate,
+        details.isHighlight,
+        details.department,
+        details.medium,
+        details.dimensions
+    );
+    printDetails(details);
 }
 
-function printDetails(data) {
-    document.title = data.title;
-    document.querySelector(".artwork-detail a").href = data.primaryImage;
-    document.querySelector(".artwork-detail img").src = data.primaryImage;
-    document.querySelector(".artwork-detail img").alt = data.title;
-    document.querySelector(".detail-title").textContent = data.title;
-    document.querySelector(".detail-author").textContent =
-        data.artistDisplayName;
-    document.querySelector(".detail-year").textContent = data.objectDate;
+function printDetails(details) {
+    document.title = details.title;
+    document.querySelector(".image-link").href = details.imageLarge;
+    document.querySelector(".detail-image").src = details.imageLarge;
+    document.querySelector(".detail-image").alt = details.title;
+    document.querySelector(".detail-title").textContent = details.title;
+    document.querySelector(".detail-artist").textContent = details.artist;
+    document.querySelector(".detail-date").textContent = details.date;
+    document.querySelector(".detail-artist-bio").textContent =
+        details.artistBio;
+    document.querySelector(".detail-department").textContent =
+        details.department;
+    document.querySelector(".detail-medium").textContent = details.medium;
+    document.querySelector(".detail-dimensions").textContent =
+        details.dimensions;
 }
 
 document
