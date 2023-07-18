@@ -311,8 +311,8 @@ select {
 
 .container-artworks.sorting {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-    grid-gap: 1rem;
+    grid-template-columns: repeat(auto-fit, 20rem);
+    grid-gap: 2rem;
 }
 
 .artwork {
@@ -324,17 +324,20 @@ select {
 
 .container-artworks.sorting .artwork {
     margin-bottom: 0;
+    border: 1px solid var(--color-text);
+    border-radius: 1rem;
 }
 
 .image {
+    cursor: zoom-in;
     display: block;
     width: 100%;
 }
 
 .container-artworks.sorting .image {
-    display: flex;
-    width: auto;
     height: 20rem;
+    object-fit: cover;
+    border-radius: 1rem 1rem 0 0;
 }
 
 .artwork-overlay {
@@ -352,16 +355,30 @@ select {
     opacity: 0;
 }
 
+.container-artworks.sorting .artwork-overlay {
+    position: relative;
+    gap: 1rem;
+    opacity: 1;
+    width: auto;
+    height: auto;
+    background: none;
+    border-top: 2px solid var(--color-text);
+}
+
 .artwork-overlay:hover {
     opacity: 1;
 }
 
 .artwork-overlay p {
-    cursor: text;
     color: #f0f0f0;
     font-family: var(--font-serif);
     font-size: 1.2rem;
     text-shadow: var(--shadow-text);
+}
+
+.container-artworks.sorting .artwork-overlay p {
+    color: var(--color-text);
+    text-shadow: none;
 }
 
 .favorite-button {
@@ -370,6 +387,10 @@ select {
     position: absolute;
     right: 1.5rem;
     bottom: 2.25rem;
+}
+
+.container-artworks.sorting .favorite-button {
+    visibility: visible;
 }
 
 .artwork:hover .favorite-button {
@@ -395,6 +416,10 @@ select {
 
 .title {
     font-style: italic;
+}
+
+.container-artworks.sorting .title {
+    font-weight: bold;
 }
 
 .image-footer {
