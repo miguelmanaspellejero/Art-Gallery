@@ -4,6 +4,7 @@ import {
     printArtworks,
     showAll,
     showHighlightsOnly,
+    controlHighlightFilter,
 } from "./modules/dom.js";
 import { results, fetchIds, fetchData } from "./modules/fetch.js";
 import { saveResults, loadResults, saveQuery } from "./modules/storage.js";
@@ -59,6 +60,7 @@ async function controlSearchProcess(query, filter) {
     }
     await printArtworks(results);
     showSearchStatus(query, "finished", results);
+    controlHighlightFilter();
     saveQuery(query);
     limitSearches(false);
 }

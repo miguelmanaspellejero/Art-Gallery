@@ -98,6 +98,7 @@ export function controlHighlightFilter() {
         checkbox.disabled = true;
         container.classList.add("disabled");
     } else {
+        checkbox.disabled = false;
         container.classList.remove("disabled");
     }
 }
