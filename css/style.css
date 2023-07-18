@@ -213,6 +213,7 @@ select {
     display: flex;
     align-items: center;
     gap: 3rem;
+    user-select: none;
 }
 
 #sort-select {
@@ -222,6 +223,7 @@ select {
 .container-checkbox {
     display: flex;
     align-items: center;
+    user-select: none;
 }
 
 #highlight-checkbox {
@@ -233,13 +235,25 @@ select {
     border: 1px solid var(--color-text);
 }
 
+#highlight-label {
+    cursor: pointer;
+    margin-left: 0.5rem;
+}
+
 #highlight-checkbox:checked {
     background-color: var(--color-accent);
 }
 
-#highlight-label {
-    cursor: pointer;
-    margin-left: 0.5rem;
+#highlight-checkbox:disabled {
+    cursor: default;
+}
+
+.container-checkbox.disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+.container-checkbox.disabled #highlight-label {
+    cursor: default;
 }
 
 /*#endregion  */
@@ -296,9 +310,9 @@ select {
 }
 
 .container-artworks.sorting {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    grid-gap: 1rem;
 }
 
 .artwork {

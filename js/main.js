@@ -1,11 +1,12 @@
 import {
+    resetSortingAndFilters,
     showSearchStatus,
     printArtworks,
     showAll,
     showHighlightsOnly,
 } from "./modules/dom.js";
 import { results, fetchIds, fetchData } from "./modules/fetch.js";
-import { saveResults, saveQuery } from "./modules/storage.js";
+import { saveResults, loadResults, saveQuery } from "./modules/storage.js";
 import { printHeaderAndFooter } from "./modules/templates.js";
 
 await printHeaderAndFooter();
@@ -41,8 +42,7 @@ function startSearch() {
 //Control search functions process
 
 async function controlSearchProcess(query, filter) {
-    //Uncheck filter
-    document.querySelector("#highlight-checkbox").checked = false;
+    resetSortingAndFilters();
     limitSearches(true);
     showSearchStatus(query, "loading");
     const entries = await fetchIds(query, filter);
@@ -107,10 +107,11 @@ document.querySelector("#sort-select").addEventListener("change", (e) => {
     container.replaceChildren();
 
     if (selection === "relevance") {
-        printArtworks(results);
+        printArtworks(loadResults()); // Saved array with original order
     } else if (selection === "title") {
         printArtworks(
-            [...results].sort((a, b) => {
+            // Modify original array so highlight filter keeps selected order.
+            results.sort((a, b) => {
                 if (a.title < b.title) {
                     return -1;
                 }
@@ -122,7 +123,7 @@ document.querySelector("#sort-select").addEventListener("change", (e) => {
         );
     } else if (selection === "title-reverse") {
         printArtworks(
-            [...results].sort((a, b) => {
+            results.sort((a, b) => {
                 if (a.title > b.title) {
                     return -1;
                 }
@@ -134,7 +135,7 @@ document.querySelector("#sort-select").addEventListener("change", (e) => {
         );
     } else if (selection === "artist") {
         printArtworks(
-            [...results].sort((a, b) => {
+            results.sort((a, b) => {
                 if (a.artistSort < b.artistSort) {
                     return -1;
                 }
@@ -146,7 +147,7 @@ document.querySelector("#sort-select").addEventListener("change", (e) => {
         );
     } else if (selection === "artist-reverse") {
         printArtworks(
-            [...results].sort((a, b) => {
+            results.sort((a, b) => {
                 if (a.artistSort > b.artistSort) {
                     return -1;
                 }
@@ -157,9 +158,9 @@ document.querySelector("#sort-select").addEventListener("change", (e) => {
             })
         );
     } else if (selection === "date") {
-        printArtworks([...results].sort((a, b) => a.dateSort - b.dateSort));
+        printArtworks(results.sort((a, b) => a.dateSort - b.dateSort));
     } else if (selection === "date-reverse") {
-        printArtworks([...results].sort((a, b) => b.dateSort - a.dateSort));
+        printArtworks(results.sort((a, b) => b.dateSort - a.dateSort));
     }
 });
 

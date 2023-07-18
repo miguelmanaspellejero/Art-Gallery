@@ -81,10 +81,32 @@ if (localStorage.getItem("savedQuery")) {
     // Make filter and sort options visible only when status showed results
 }
 
-// Filter results
+// Filter results status
+
+export function resetSortingAndFilters() {
+    document.querySelector("#highlight-checkbox").checked = false;
+    document.querySelector("#sort-select").value = "relevance";
+    document.querySelector(".container-artworks").classList.remove("sorting");
+}
+
+export function controlHighlightFilter() {
+    const container = document.querySelector(".container-checkbox");
+    const checkbox = document.querySelector("#highlight-checkbox");
+    const highlights = results.filter((item) => item.highlight === true);
+    // Disable checkbox filter when all results are highlights or when there are none.
+    if (results.length === highlights.length || highlights.length === 0) {
+        checkbox.disabled = true;
+        container.classList.add("disabled");
+    } else {
+        container.classList.remove("disabled");
+    }
+}
+
+// Reset filters on start
+controlHighlightFilter();
+resetSortingAndFilters();
 
 export function showAll() {
-    console.log(results);
     document.querySelector(".container-artworks").replaceChildren();
     printArtworks(results);
     showSearchStatus(loadQuery(), "finished", results);
