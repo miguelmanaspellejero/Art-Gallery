@@ -44,6 +44,12 @@ html {
     scroll-behavior: smooth;
 }
 
+body {
+    display: grid;
+    min-height: 100vh;
+    grid-template-rows: auto 1fr auto;
+}
+
 h1 {
     font-family: var(--font-display);
 }
@@ -395,6 +401,7 @@ footer {
     font-family: var(--font-serif);
     font-size: small;
     padding: 2rem;
+    margin-top: 4rem;
 }
 
 footer span {
@@ -412,8 +419,8 @@ footer a {
 /*#region || Back to top*/
 .back-to-top {
     display: none;
-    position: sticky;
-    bottom: 5.25rem;
+    position: fixed;
+    bottom: 2.75rem;
     left: calc(100% - 15rem);
     place-self: end;
     z-index: 2;
