@@ -93,7 +93,6 @@ select {
     padding: 0 2rem;
     border-bottom: 1px solid;
 }
-
 /* Logo and title */
 
 .header-title {
@@ -320,11 +319,13 @@ select {
     display: flex;
     flex-direction: column;
     margin-bottom: 1rem;
+    overflow: hidden;
+    background-color: var(--color-background);
 }
 
 .container-artworks.sorting .artwork {
-    margin-bottom: 0;
     border: 1px solid var(--color-text);
+    margin-bottom: 0;
     border-radius: 1rem;
 }
 
@@ -332,11 +333,14 @@ select {
     cursor: zoom-in;
     display: block;
     width: 100%;
+    scale: 1.1;
 }
 
 .container-artworks.sorting .image {
+    outline: 1px solid var(--color-text);
     height: 20rem;
     object-fit: cover;
+    object-position: top;
     border-radius: 1rem 1rem 0 0;
 }
 
@@ -353,16 +357,16 @@ select {
     justify-content: space-between;
     padding: 1.5rem;
     opacity: 0;
+    border-top: 1px solid var(--color-text);
 }
 
 .container-artworks.sorting .artwork-overlay {
     position: relative;
-    gap: 1rem;
     opacity: 1;
+    flex-grow: 10;
     width: auto;
     height: auto;
-    background: none;
-    border-top: 2px solid var(--color-text);
+    background-color: var(--color-background);
 }
 
 .artwork-overlay:hover {
@@ -420,6 +424,7 @@ select {
 
 .container-artworks.sorting .title {
     font-weight: bold;
+    margin-bottom: 2rem;
 }
 
 .image-footer {
