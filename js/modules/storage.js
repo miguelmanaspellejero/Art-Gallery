@@ -16,3 +16,11 @@ export function saveQuery(query) {
 export function loadQuery() {
     return localStorage.getItem("savedQuery");
 }
+
+export function saveFavorites(favList) {
+    localStorage.setItem("savedFavorites", JSON.stringify(favList));
+}
+
+export function loadFavorites() {
+    return JSON.parse(localStorage.getItem("savedFavorites"));
+}

@@ -7,7 +7,12 @@ import {
     controlHighlightFilter,
 } from "./modules/dom.js";
 import { results, fetchIds, fetchData } from "./modules/fetch.js";
-import { saveResults, loadResults, saveQuery } from "./modules/storage.js";
+import {
+    saveResults,
+    loadResults,
+    saveQuery,
+    saveFavorites,
+} from "./modules/storage.js";
 import { printHeaderAndFooter } from "./modules/templates.js";
 
 await printHeaderAndFooter();
@@ -167,7 +172,6 @@ document.querySelector("#sort-select").addEventListener("change", (e) => {
 });
 
 export function favEvent(artworks) {
-    const favList = [];
     const favButtons = document.querySelectorAll(".favorite-button");
     for (const favButton of favButtons) {
         favButton.addEventListener("click", (e) => {
@@ -180,10 +184,12 @@ export function favEvent(artworks) {
             const id = +e.target.parentNode.dataset.id;
             for (const artwork of artworks) {
                 if (artwork.id === id) {
-                    favList.push(artwork);
+                    artwork.isFavorite = !artwork.isFavorite;
                 }
             }
-            console.log(favList);
+            const favList = results.filter((result) => result.isFavorite);
+            saveResults();
+            saveFavorites(favList);
         });
     }
 }

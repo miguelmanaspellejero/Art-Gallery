@@ -46,6 +46,12 @@ export async function printArtworks(artworks) {
         clone
             .querySelector(".favorite-button")
             .setAttribute("data-id", artwork.id);
+        if (artwork.isFavorite) {
+            clone
+                .querySelector(".favorite-button span")
+                .classList.add("favorite-clicked");
+            clone.querySelector(".favorite-button").title = "Remove favorite";
+        }
         clone.querySelector(".title").textContent = artwork.title;
         clone.querySelector(".artist").textContent = artwork.artist;
         clone.querySelector(".date").textContent = artwork.date;
@@ -92,7 +98,7 @@ export function resetSortingAndFilters() {
 export function controlHighlightFilter() {
     const container = document.querySelector(".container-checkbox");
     const checkbox = document.querySelector("#highlight-checkbox");
-    const highlights = results.filter((item) => item.highlight === true);
+    const highlights = results.filter((result) => result.highlight);
     // Disable checkbox filter when all results are highlights or when there are none.
     if (results.length === highlights.length || highlights.length === 0) {
         checkbox.disabled = true;
@@ -114,7 +120,7 @@ export function showAll() {
 }
 
 export function showHighlightsOnly() {
-    const highlights = results.filter((item) => item.highlight === true);
+    const highlights = results.filter((result) => result.highlight);
     document.querySelector(".container-artworks").replaceChildren();
     printArtworks(highlights);
     showSearchStatus(loadQuery(), "finished", highlights);

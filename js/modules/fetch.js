@@ -1,5 +1,5 @@
 import { Artwork } from "./data.js";
-import { saveResults } from "./storage.js";
+import { loadFavorites, saveResults } from "./storage.js";
 
 export const results = [];
 
@@ -50,5 +50,19 @@ export async function fetchData(entries) {
             );
         }
     }
+    await checkFavorites();
     saveResults();
+}
+
+// checkIf new results were saved in favorites and adjust property accordingly.
+async function checkFavorites() {
+    const favorites = loadFavorites();
+    for (const result of results) {
+        // Check if any id of the saved favorites matches the one of the result, regardless of index.
+        if (favorites.some((favorite) => favorite.id === result.id)) {
+            result.isFavorite = true;
+        } else {
+            result.isFavorite = false;
+        }
+    }
 }
