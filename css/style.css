@@ -16,6 +16,17 @@
     --shadow-text: 1px 1px 3px #101010;
 }
 
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-background: #101010;
+        --color-text: #beb0bf;
+        --color-accent: #aa75ff;
+    }
+    select option {
+        background-color: #333;
+    }
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -39,7 +50,6 @@ main {
 }
 
 html {
-    /* color-scheme: light dark; */
     background-color: var(--color-background);
     scroll-behavior: smooth;
 }
@@ -126,6 +136,7 @@ select {
 
 .container-search:focus-within {
     box-shadow: var(--shadow-glow) var(--color-accent);
+    border: none;
 }
 
 #search-input {
