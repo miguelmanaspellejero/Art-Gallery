@@ -1,4 +1,5 @@
 import { Artwork } from "./modules/data.js";
+import { loadFavorites } from "./modules/storage.js";
 import { printHeaderAndFooter } from "./modules/templates.js";
 
 await printHeaderAndFooter();
@@ -26,6 +27,13 @@ async function fetchDetails() {
         details.medium,
         details.dimensions
     );
+    const favorites = loadFavorites();
+    if (favorites.length > 0) {
+        const isFavorite = favorites.some(
+            (favorite) => favorite.id === details.id
+        );
+        detailFavButtonEvent(isFavorite, details);
+    }
     printDetails(details);
 }
 
@@ -44,6 +52,16 @@ function printDetails(details) {
     document.querySelector(".detail-medium").textContent = details.medium;
     document.querySelector(".detail-dimensions").textContent =
         details.dimensions;
+}
+
+function detailFavButtonEvent(isFavorite, details) {
+    const favButton = document.querySelector(".detail-favorite");
+    if (isFavorite) {
+        document
+            .querySelector(".detail-favorite span")
+            .classList.add("favorite-clicked");
+        favButton.title = "Favorite artwork";
+    }
 }
 
 document
