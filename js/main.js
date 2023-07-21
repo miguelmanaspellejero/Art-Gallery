@@ -5,6 +5,8 @@ import {
     showAll,
     showHighlightsOnly,
     controlHighlightFilter,
+    restoreContent,
+    restoreQuery,
 } from "./modules/dom.js";
 import { results, fetchIds, fetchData } from "./modules/fetch.js";
 import {
@@ -17,6 +19,32 @@ import { printHeaderAndFooter } from "./modules/templates.js";
 
 await printHeaderAndFooter();
 
+let searchRunning = false; // This avoids new searches from being started until current is finished.
+
+// Load searches from other pages
+
+function getSearchParameters() {
+    const searchUrl = new URL(window.location.href);
+    const query = searchUrl.searchParams.get("query");
+    const filter = searchUrl.searchParams.get("filter");
+    if (query) {
+        clearContent();
+        const filterValue = filter ? filter : ""; // Send empty string if there was no filter selected.
+        controlSearchProcess(query, filterValue);
+    } else {
+        // Restore only when there's something in storage and we don't load from an outside search
+        if (localStorage.getItem("savedResults")) {
+            restoreContent();
+        }
+        if (localStorage.getItem("savedQuery")) {
+            restoreQuery();
+            // Make filter and sort options visible only when status showed results
+        }
+    }
+}
+
+getSearchParameters();
+
 // Back to top button:
 
 window.addEventListener("scroll", () => {
@@ -24,8 +52,6 @@ window.addEventListener("scroll", () => {
         .querySelector(".back-to-top")
         .classList.toggle("display-flex", window.scrollY > 0);
 });
-
-let searchRunning = false; // This avoids new searches from being started until current is finished.
 
 // Click and enter search events
 document.querySelector("#search-button").addEventListener("click", startSearch);

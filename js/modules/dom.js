@@ -62,29 +62,19 @@ export async function printArtworks(artworks) {
 }
 
 // print restored array from localStorage
-function restoreContent() {
+export function restoreContent() {
     const restoredResults = loadResults();
     results.push(...restoredResults);
     printArtworks(results);
 }
 
 // show previous status
-function restoreQuery() {
+export function restoreQuery() {
     if (results.length === 0) {
         showSearchStatus(loadQuery(), "notFound");
     } else {
         showSearchStatus(loadQuery(), "finished", results);
     }
-}
-
-// Restore only when there's something in storage
-
-if (localStorage.getItem("savedResults")) {
-    restoreContent();
-}
-if (localStorage.getItem("savedQuery")) {
-    restoreQuery();
-    // Make filter and sort options visible only when status showed results
 }
 
 // Filter results status

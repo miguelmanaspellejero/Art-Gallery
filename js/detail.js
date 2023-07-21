@@ -66,4 +66,4 @@ function detailFavButtonEvent(isFavorite, details) {
 
 document
     .querySelector("#button-back")
-    .addEventListener("click", () => window.history.back());
+    .addEventListener("click", () => (window.location.href = "index.html"));

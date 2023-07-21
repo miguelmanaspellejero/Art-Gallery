@@ -589,6 +589,10 @@ footer a {
 
 /*#region || Landing Page */
 
+.landing-body {
+    overflow: hidden;
+}
+
 .container-landing {
     height: 100vh;
     width: 100%;
@@ -632,6 +636,7 @@ footer a {
     z-index: -1;
     background: var(--color-background) center center / cover no-repeat;
     filter: brightness(0.5);
+    scale: 1.1;
 }
 
 .container-search.landing-search {
@@ -728,8 +733,8 @@ by Hunter Garret.
 }
 
 .slider-nav a {
-    width: 0.75rem;
-    height: 0.75rem;
+    width: 1rem;
+    height: 1rem;
     border-radius: 50%;
     background-color: #f0f0f0;
     border: 1px solid #101010;

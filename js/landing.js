@@ -1,3 +1,5 @@
+import { sendSearch } from "./modules/search.js";
+
 function chooseRandomBackground() {
     const backgroundUrls = [
         "https://images.metmuseum.org/CRDImages/ep/original/DT1567.jpg",
@@ -16,3 +18,11 @@ function chooseRandomBackground() {
 }
 
 chooseRandomBackground();
+
+// Click and enter search events
+document.querySelector("#search-button").addEventListener("click", sendSearch);
+document.querySelector("#search-input").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+        sendSearch();
+    }
+});
