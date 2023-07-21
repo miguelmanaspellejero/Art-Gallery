@@ -1,9 +1,17 @@
 import { Artwork } from "./modules/data.js";
 import { loadFavorites } from "./modules/storage.js";
 import { printHeaderAndFooter } from "./modules/templates.js";
+import sendSearch from "./modules/search.js";
 
 await printHeaderAndFooter();
-fetchDetails();
+
+// Click and enter search events
+document.querySelector("#search-button").addEventListener("click", sendSearch);
+document.querySelector("#search-input").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+        sendSearch();
+    }
+});
 
 async function fetchDetails() {
     const detailUrl = new URL(window.location.href);
@@ -36,6 +44,7 @@ async function fetchDetails() {
     }
     printDetails(details);
 }
+fetchDetails();
 
 function printDetails(details) {
     document.title = details.title;

@@ -1,8 +1,17 @@
 import { printHeaderAndFooter } from "./modules/templates.js";
-import { loadFavorites, saveFavorites } from "./modules/storage.js";
+import { loadFavorites } from "./modules/storage.js";
+import sendSearch from "./modules/search.js";
 
 await printHeaderAndFooter();
-document.querySelector(".link-favorites").classList.add("active-link");
+document.querySelector(".link-favorites").classList.add("active-link"); // Style link to show current page status
+
+// Click and enter search events
+document.querySelector("#search-button").addEventListener("click", sendSearch);
+document.querySelector("#search-input").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+        sendSearch();
+    }
+});
 
 if (loadFavorites().length > 0) {
     printFavorites();

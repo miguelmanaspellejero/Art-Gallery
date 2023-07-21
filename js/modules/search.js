@@ -1,4 +1,4 @@
-export function sendSearch() {
+export default function sendSearch() {
     const query = document.querySelector("#search-input").value.trim();
     const filter = document.querySelector("#search-select").value;
     const filterParam = filter ? `&filter=${filter}` : "";

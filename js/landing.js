@@ -1,4 +1,4 @@
-import { sendSearch } from "./modules/search.js";
+import sendSearch from "./modules/search.js";
 
 function chooseRandomBackground() {
     const backgroundUrls = [
