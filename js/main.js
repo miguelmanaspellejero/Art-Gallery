@@ -35,6 +35,7 @@ function getSearchParameters() {
         // Restore only when there's something in storage and we don't load from an outside search
         if (localStorage.getItem("savedResults")) {
             restoreContent();
+            controlHighlightFilter();
         }
         if (localStorage.getItem("savedQuery")) {
             restoreQuery();
@@ -91,8 +92,8 @@ async function controlSearchProcess(query, filter) {
     }
     await printArtworks(results);
     showSearchStatus(query, "finished", results);
-    controlHighlightFilter();
     saveQuery(query);
+    controlHighlightFilter();
     limitSearches(false);
 }
 
