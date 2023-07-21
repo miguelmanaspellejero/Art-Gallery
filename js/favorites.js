@@ -17,6 +17,7 @@ function printFavorites() {
     const template = document.querySelector("#favorite-artworks").content;
     const slideFragment = document.createDocumentFragment();
     for (const favorite of favorites) {
+        // Print images from template
         const clone = template.cloneNode(true);
         const favImage = clone.querySelector(".favorite-image");
         favImage.id = favorite.id;
@@ -26,16 +27,13 @@ function printFavorites() {
             window.location.href = `detail.html?id=${favorite.id}`;
         });
         favFragment.appendChild(clone);
+        // Create links with ids to navigate the slider
         const slideLink = document.createElement("a");
         slideLink.href = "#" + favorite.id;
         slideFragment.append(slideLink);
     }
-
     document.querySelector(".slider-nav").appendChild(slideFragment);
     document.querySelector(".container-favorites").appendChild(favFragment);
-
-    for (const favorite of favorites) {
-    }
 }
 
 function printFavStatus() {
