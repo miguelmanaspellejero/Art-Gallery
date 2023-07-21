@@ -54,6 +54,10 @@ h1 {
     font-family: var(--font-display);
 }
 
+h2 {
+    font-family: var(--font-serif);
+}
+
 input,
 select,
 button {
@@ -294,7 +298,7 @@ select {
     background-image: linear-gradient(
         90deg,
         transparent,
-        var(--color-accent),
+        var(--color-secondary),
         transparent
     );
     background-size: 200%;
@@ -531,7 +535,6 @@ footer a {
 }
 
 .detail-header h2 {
-    font-family: var(--font-serif);
     max-width: 75%;
 }
 
@@ -565,6 +568,21 @@ footer a {
     .detail-info {
         height: auto;
     }
+}
+
+.detail-favorite {
+    cursor: default;
+}
+
+.detail-favorite span {
+    font-variation-settings: "FILL" 1;
+    font-size: 1.5rem;
+    color: #f0f0f0;
+    -webkit-text-stroke: 1.5px #101010;
+}
+
+.detail-favorite span.favorite-clicked {
+    color: var(--color-favorite);
 }
 
 /*#endregion  */
@@ -629,6 +647,101 @@ footer a {
         display: none;
     }
 }
+
+/*#endregion */
+
+/*#region || Favorites Page */
+
+.favorite-main {
+    margin-top: 4rem;
+}
+
+.link-favorites.active-link p {
+    text-decoration: underline;
+}
+
+.link-favorites.active-link span {
+    -webkit-text-stroke: 1.5px #101010;
+    font-variation-settings: "FILL" 1;
+    color: var(--color-favorite);
+}
+
+.no-favorites-message {
+    display: none;
+    font-size: 1.5rem;
+    width: 100%;
+    height: 100%;
+    gap: 2rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Slider styles based on CSS Only Carousel 
+https://skillthrive.gumroad.com/l/cgybb
+by Hunter Garret.
+*/
+
+.slider {
+    position: relative;
+    max-width: 60rem;
+    margin: 2rem auto;
+}
+
+.container-favorites {
+    display: flex;
+    aspect-ratio: 2 / 1;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    border: 1px solid var(--color-text);
+    border-radius: 1rem;
+    scrollbar-width: none;
+}
+
+.container-favorites::-webkit-scrollbar {
+    display: none;
+}
+
+.favorite-frame {
+    flex: 1 0 100%;
+    scroll-snap-align: start;
+    overflow: hidden;
+}
+
+.favorite-image {
+    cursor: zoom-in;
+    scale: 1.1;
+    object-position: top;
+    object-fit: cover;
+    width: 100%;
+}
+
+.slider-nav {
+    display: flex;
+    column-gap: 1.5rem;
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.slider-nav a {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    border: 1px solid #101010;
+    opacity: 0.8;
+    transition: opacity ease 250ms;
+}
+
+.slider-nav a:hover {
+    opacity: 1;
+    background-color: var(--color-accent);
+}
+/* slider-buttons */
 
 /*#endregion */
 

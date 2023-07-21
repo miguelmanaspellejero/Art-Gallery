@@ -34,6 +34,26 @@
     <body>
         <noscript>Please, enable Javascript to run this website</noscript>
         <header class="header-top"></header>
+        <main>
+            <div class="container-status-sort">
+                <div class="container-status">
+                    <span class="status-message"></span>
+                </div>
+            </div>
+            <section class="slider">
+                <div class="container-favorites"></div>
+                <div class="slider-nav"></div>
+            </section>
+            <section class="no-favorites-message">
+                <h2>Your collection is empty</h2>
+                <p>You can add your favorite artworks using the ❤️ icon</p>
+            </section>
+        </main>
         <footer></footer>
     </body>
+    <template id="favorite-artworks">
+        <div class="favorite-frame">
+            <img class="favorite-image" loading="lazy" />
+        </div>
+    </template>
 </html>
