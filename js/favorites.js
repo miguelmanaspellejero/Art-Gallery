@@ -79,7 +79,6 @@ document.querySelector(".container-remove").addEventListener("click", () => {
             result.isFavorite = false;
         }
     }
-    console.log(loadResults());
     saveResults(results);
     // Remove favorites
     favorites.splice(0);
@@ -87,3 +86,27 @@ document.querySelector(".container-remove").addEventListener("click", () => {
     //Update DOM status
     checkFavoriteCollection();
 });
+
+//Add selection indicator to slider links.
+
+document.querySelectorAll(".slider-nav a")[0].classList.add("selected"); // Mark first one as selected on load.
+
+document
+    .querySelector(".slider-nav")
+    .addEventListener("click", updateSelection);
+
+function updateSelection(e) {
+    if (e.target === e.currentTarget) {
+        return;
+    }
+    let selection = 0;
+    const links = document.querySelectorAll(".slider-nav a");
+    links.forEach((link) => link.classList.remove("selected"));
+    for (const link of links) {
+        selection++;
+        link.classList.add("selected");
+        if (link === e.target) {
+            break;
+        }
+    }
+}

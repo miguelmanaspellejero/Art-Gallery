@@ -765,14 +765,20 @@ by Hunter Garret.
     border-radius: 50%;
     background-color: #f0f0f0;
     border: 1px solid #101010;
-    opacity: 0.8;
+    opacity: 0.5;
     transition: opacity ease 250ms;
 }
 
 .slider-nav a:hover {
     opacity: 1;
+    background-color: var(--color-secondary);
+}
+
+.slider-nav a.selected {
+    opacity: 1;
     background-color: var(--color-accent);
 }
+
 /* slider-buttons */
 
 /*#endregion */
