@@ -19,12 +19,16 @@
 @media (prefers-color-scheme: dark) {
     :root {
         --color-background: #101010;
-        --color-text: #beb0bf;
+        --color-text: #b6b0b8;
         --color-accent: #aa75ff;
         --color-disabled: #555;
     }
     select option {
         background-color: #333;
+    }
+    .header-title h1 {
+        font-weight: 600;
+        letter-spacing: 0.1rem;
     }
 }
 
@@ -102,11 +106,12 @@ select {
     top: 0;
     z-index: 99;
     height: 4rem;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 2rem;
-    border-bottom: 1px solid;
+    border-bottom: 1px solid var(--color-text);
 }
 /* Logo and title */
 
@@ -114,12 +119,15 @@ select {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    width: 14rem;
 }
 
 .header-title span {
     color: var(--color-accent);
     font-variation-settings: "FILL" 1;
+}
+
+.header-title h1 {
+    font-size: calc(1rem + 1vw);
 }
 
 /* Search box */
@@ -128,11 +136,16 @@ select {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 50%;
+    max-width: 40rem;
+    min-width: 20rem;
     border: 1px solid;
     height: 2.5rem;
-    width: 28rem;
     border-radius: 2rem;
     padding: 0 1.5rem;
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%);
 }
 
 .container-search:focus-within {
@@ -140,18 +153,18 @@ select {
     border: none;
 }
 
-#search-input {
+#search-input,
+#search-select,
+.container-favorite {
     font-size: 1.125rem;
-    flex-grow: 1;
 }
 
-#search-select {
-    width: 5rem;
-    font-size: 1.125rem;
+#search-input {
+    flex: 1;
 }
 
 #search-button {
-    margin-left: 2rem;
+    margin-left: 1rem;
 }
 
 #search-button:hover {
@@ -178,19 +191,16 @@ select {
 
 /* Favorites link and Theme selector */
 
-.container-favorite-theme {
+.container-favorite {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    width: 14rem;
+    justify-content: center;
 }
 
 .link-favorites {
-    font-size: 1.125rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0 2rem;
 }
 
 .link-favorites:hover p {
@@ -202,16 +212,12 @@ select {
         0 0 1rem var(--color-favorite), 0 0 1.5rem var(--color-favorite);
 }
 
-.button-round {
-    border: 1px solid var(--color-text);
-    border-radius: 50%;
-    height: 2.5rem;
-    width: 2.5rem;
-}
-
-.button-round:hover span {
-    text-shadow: 0 0 0.5rem var(--color-accent), 0 0 1rem var(--color-accent),
-        0 0 1.5rem var(--color-accent);
+@media (max-width: 820px) {
+    .container-search button,
+    .header-title h1,
+    .link-favorites p {
+        display: none;
+    }
 }
 
 /*#endregion  */
@@ -386,7 +392,6 @@ select {
     justify-content: space-between;
     padding: 1.5rem;
     opacity: 0;
-    border-top: 1px solid var(--color-text);
 }
 
 .container-artworks.sorting .artwork-overlay {
@@ -396,6 +401,7 @@ select {
     width: auto;
     height: auto;
     background-color: var(--color-background);
+    border-top: 1px solid var(--color-text);
 }
 
 .artwork-overlay:hover {
@@ -490,6 +496,18 @@ footer a {
 /*#endregion */
 
 /*#region || Back to top*/
+.button-round {
+    border: 1px solid var(--color-text);
+    border-radius: 50%;
+    height: 2.5rem;
+    width: 2.5rem;
+}
+
+.button-round:hover span {
+    text-shadow: 0 0 0.5rem var(--color-accent), 0 0 1rem var(--color-accent),
+        0 0 1.5rem var(--color-accent);
+}
+
 .back-to-top {
     display: none;
     position: fixed;
@@ -632,7 +650,7 @@ footer a {
     text-align: center;
     max-width: 50%;
     color: #f0f0f0;
-    font-size: 1.5rem;
+    font-size: calc(1rem + 1vw);
     text-shadow: var(--shadow-text);
 }
 
@@ -651,15 +669,8 @@ footer a {
 .container-search.landing-search {
     background-color: var(--color-background);
     height: 3rem;
-    width: 50vw;
-    min-width: 20rem;
     box-shadow: 1px 1px 3px #101010;
-}
-
-@media (max-width: 768px) {
-    .container-search.landing-search button {
-        display: none;
-    }
+    border: none;
 }
 
 /*#endregion */
