@@ -1,5 +1,10 @@
 import { printHeaderAndFooter } from "./modules/templates.js";
-import { loadFavorites } from "./modules/storage.js";
+import {
+    loadFavorites,
+    saveFavorites,
+    loadResults,
+    saveResults,
+} from "./modules/storage.js";
 import sendSearch from "./modules/search.js";
 
 await printHeaderAndFooter();
@@ -13,12 +18,16 @@ document.querySelector("#search-input").addEventListener("keydown", (e) => {
     }
 });
 
-if (loadFavorites().length > 0) {
-    printFavorites();
-    printFavStatus();
-} else {
-    printNoFavoritesMessage();
+function checkFavoriteCollection() {
+    if (loadFavorites().length > 0) {
+        printFavorites();
+        printFavStatus();
+    } else {
+        printNoFavoritesMessage();
+    }
 }
+
+checkFavoriteCollection();
 
 function printFavorites() {
     const favorites = loadFavorites();
@@ -56,4 +65,25 @@ function printNoFavoritesMessage() {
         .querySelector(".no-favorites-message")
         .classList.add("display-flex");
     document.querySelector(".slider").classList.add("display-none");
+    document
+        .querySelector(".container-status-sort")
+        .classList.add("display-none");
 }
+
+document.querySelector(".container-remove").addEventListener("click", () => {
+    // Change isFavorite value in results
+    const favorites = loadFavorites();
+    const results = loadResults();
+    for (const result of results) {
+        if (favorites.some((favorite) => favorite.id === result.id)) {
+            result.isFavorite = false;
+        }
+    }
+    console.log(loadResults());
+    saveResults(results);
+    // Remove favorites
+    favorites.splice(0);
+    saveFavorites(favorites);
+    //Update DOM status
+    checkFavoriteCollection();
+});

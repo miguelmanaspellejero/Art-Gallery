@@ -1,7 +1,5 @@
-import { results } from "./fetch.js";
-
 //LocalStorage functions to save and restore results from search and search query status
-export function saveResults() {
+export function saveResults(results) {
     localStorage.setItem("savedResults", JSON.stringify(results));
 }
 

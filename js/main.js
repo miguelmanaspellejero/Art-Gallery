@@ -100,7 +100,7 @@ async function controlSearchProcess(query, filter) {
 function interruptSearch(query) {
     showSearchStatus(query, "notFound");
     saveQuery(query);
-    saveResults();
+    saveResults(results);
     limitSearches(false);
 }
 
@@ -215,7 +215,7 @@ export function favEvent(artworks) {
                 }
             }
             const favList = results.filter((result) => result.isFavorite);
-            saveResults();
+            saveResults(results);
             saveFavorites(favList);
         });
     }

@@ -51,7 +51,7 @@ export async function fetchData(entries) {
         }
     }
     await checkFavorites();
-    saveResults();
+    saveResults(results);
 }
 
 // checkIf new results were saved in favorites and adjust property accordingly.

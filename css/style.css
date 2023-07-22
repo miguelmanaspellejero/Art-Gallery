@@ -21,6 +21,7 @@
         --color-background: #101010;
         --color-text: #beb0bf;
         --color-accent: #aa75ff;
+        --color-disabled: #555;
     }
     select option {
         background-color: #333;
@@ -333,6 +334,7 @@ select {
     columns: 4 20rem;
     column-gap: 1rem;
     overflow: auto;
+    break-inside: avoid;
 }
 
 .container-artworks.sorting {
@@ -685,12 +687,25 @@ footer a {
 .no-favorites-message {
     display: none;
     font-size: 1.5rem;
-    width: 100%;
     height: 100%;
+    width: 100%;
     gap: 2rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.container-remove {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    user-select: none;
+    cursor: pointer;
+}
+
+.container-remove:hover span {
+    text-shadow: 0 0 0.5rem var(--color-favorite),
+        0 0 1rem var(--color-favorite), 0 0 1.5rem var(--color-favorite);
 }
 
 /* Slider styles based on CSS Only Carousel 
@@ -731,6 +746,11 @@ by Hunter Garret.
     object-position: top;
     object-fit: cover;
     width: 100%;
+}
+
+.slider-favorite {
+    top: 2rem;
+    right: 3rem;
 }
 
 .slider-nav {

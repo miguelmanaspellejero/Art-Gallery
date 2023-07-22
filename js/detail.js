@@ -36,7 +36,7 @@ async function fetchDetails() {
         details.dimensions
     );
     const favorites = loadFavorites();
-    if (favorites.length > 0) {
+    if (favorites) {
         const isFavorite = favorites.some(
             (favorite) => favorite.id === details.id
         );
