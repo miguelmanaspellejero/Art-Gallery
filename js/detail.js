@@ -1,5 +1,10 @@
 import { Artwork } from "./modules/data.js";
-import { loadFavorites } from "./modules/storage.js";
+import {
+    loadFavorites,
+    saveFavorites,
+    loadResults,
+    saveResults,
+} from "./modules/storage.js";
 import { printHeaderAndFooter } from "./modules/templates.js";
 import sendSearch from "./modules/search.js";
 
@@ -65,12 +70,32 @@ function printDetails(details) {
 
 function detailFavButtonEvent(isFavorite, details) {
     const favButton = document.querySelector(".detail-favorite");
+    favButton.setAttribute("data-id", details.id);
     if (isFavorite) {
         document
             .querySelector(".detail-favorite span")
             .classList.add("favorite-clicked");
-        favButton.title = "Favorite artwork";
+        favButton.title = "Remove favorite";
     }
+
+    favButton.addEventListener("click", (e) => {
+        const results = loadResults();
+        e.target.classList.toggle("favorite-clicked");
+        if (e.target.classList.contains("favorite-clicked")) {
+            e.target.title = "Remove favorite";
+        } else {
+            e.target.title = "Add favorite";
+        }
+        const id = +e.target.parentNode.dataset.id;
+        for (const result of results) {
+            if (result.id === id) {
+                result.isFavorite = !result.isFavorite;
+            }
+        }
+        const favList = results.filter((result) => result.isFavorite);
+        saveResults(results);
+        saveFavorites(favList);
+    });
 }
 
 document
