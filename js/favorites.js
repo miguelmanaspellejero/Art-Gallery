@@ -55,4 +55,5 @@ function printNoFavoritesMessage() {
     document
         .querySelector(".no-favorites-message")
         .classList.add("display-flex");
+    document.querySelector(".slider").classList.add("display-none");
 }
