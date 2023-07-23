@@ -55,9 +55,10 @@ function printFavorites() {
 }
 
 function printFavStatus() {
-    document.querySelector(".status-message").textContent = `Showing ${
-        loadFavorites().length
-    } favorites in your collection`;
+    document.querySelector(".status-message").textContent =
+        loadFavorites().length > 1
+            ? `Showing ${loadFavorites().length} favorites in your collection`
+            : `Showing 1 favorite in your collection`;
 }
 
 function printNoFavoritesMessage() {

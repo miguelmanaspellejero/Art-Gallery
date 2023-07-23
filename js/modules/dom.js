@@ -1,4 +1,4 @@
-import { favEvent } from "../main.js";
+import { favEvent, searchStatus } from "../main.js";
 import { results } from "./fetch.js";
 import { loadResults, loadQuery } from "./storage.js";
 
@@ -7,27 +7,30 @@ export function showSearchStatus(query, status, results) {
     // Change display visibility of status elements
     document
         .querySelector(".container-sort")
-        .classList.toggle("visibility-visible", status === "finished");
+        .classList.toggle(
+            "visibility-visible",
+            status === searchStatus.finished
+        );
     document
         .querySelector(".spinner")
-        .classList.toggle("display-flex", status === "loading");
+        .classList.toggle("display-flex", status === searchStatus.loading);
     document
         .querySelector(".loader")
-        .classList.toggle("display-flex", status === "loading");
+        .classList.toggle("display-flex", status === searchStatus.loading);
     document
         .querySelector(".container-sort")
-        .classList.toggle("display-flex", status === "finished");
+        .classList.toggle("display-flex", status === searchStatus.finished);
 
     // Create and print status message;
     const statusMessage = document.querySelector(".status-message");
-    if (status === "loading") {
-        statusMessage.textContent = "Loading";
-    } else if (status === "finished") {
+    if (status === searchStatus.loading) {
+        statusMessage.textContent = searchStatus.loading;
+    } else if (status === searchStatus.finished) {
         statusMessage.textContent =
             results.length > 1
                 ? `Showing ${results.length} results for "${query}"`
                 : `Showing 1 result for "${query}"`;
-    } else if (status === "notFound") {
+    } else if (status === searchStatus.notFound) {
         statusMessage.textContent = `No results matching "${query}"`;
     }
 }
@@ -71,9 +74,9 @@ export function restoreContent() {
 // show previous status
 export function restoreQuery() {
     if (results.length === 0) {
-        showSearchStatus(loadQuery(), "notFound");
+        showSearchStatus(loadQuery(), searchStatus.notFound);
     } else {
-        showSearchStatus(loadQuery(), "finished", results);
+        showSearchStatus(loadQuery(), searchStatus.finished, results);
     }
 }
 
@@ -106,12 +109,12 @@ resetSortingAndFilters();
 export function showAll() {
     document.querySelector(".container-artworks").replaceChildren();
     printArtworks(results);
-    showSearchStatus(loadQuery(), "finished", results);
+    showSearchStatus(loadQuery(), searchStatus.finished, results);
 }
 
 export function showHighlightsOnly() {
     const highlights = results.filter((result) => result.highlight);
     document.querySelector(".container-artworks").replaceChildren();
     printArtworks(highlights);
-    showSearchStatus(loadQuery(), "finished", highlights);
+    showSearchStatus(loadQuery(), searchStatus.finished, highlights);
 }

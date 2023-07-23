@@ -21,6 +21,13 @@ await printHeaderAndFooter();
 
 let searchRunning = false; // This avoids new searches from being started until current is finished.
 
+// Search status
+export const searchStatus = {
+    loading: Symbol(),
+    notFound: Symbol(),
+    finished: Symbol(),
+};
+
 // Load searches from other pages
 
 function getSearchParameters() {
@@ -77,7 +84,7 @@ function startSearch() {
 async function controlSearchProcess(query, filter) {
     resetSortingAndFilters();
     limitSearches(true);
-    showSearchStatus(query, "loading");
+    showSearchStatus(query, searchStatus.loading);
     const entries = await fetchIds(query, filter);
     // Stop search if no results are found
     if (entries.objectIDs === null) {
@@ -91,14 +98,14 @@ async function controlSearchProcess(query, filter) {
         return;
     }
     await printArtworks(results);
-    showSearchStatus(query, "finished", results);
+    showSearchStatus(query, searchStatus.finished, results);
     saveQuery(query);
     controlHighlightFilter();
     limitSearches(false);
 }
 
 function interruptSearch(query) {
-    showSearchStatus(query, "notFound");
+    showSearchStatus(query, searchStatus.notFound);
     saveQuery(query);
     saveResults(results);
     limitSearches(false);
