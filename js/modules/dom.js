@@ -24,7 +24,7 @@ export function showSearchStatus(query, status, results) {
     // Create and print status message;
     const statusMessage = document.querySelector(".status-message");
     if (status === searchStatus.loading) {
-        statusMessage.textContent = searchStatus.loading;
+        statusMessage.textContent = "Loading...";
     } else if (status === searchStatus.finished) {
         statusMessage.textContent =
             results.length > 1
