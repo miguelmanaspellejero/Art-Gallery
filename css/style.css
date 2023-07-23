@@ -129,7 +129,7 @@ select {
     padding: 0 1.5rem;
     position: fixed;
     left: 50%;
-    transform: translate(-50%);
+    transform: translateX(-50%);
 }
 
 .container-search:focus-within {
@@ -667,6 +667,8 @@ footer a {
 .no-favorites-message {
     display: none;
     font-size: 1.5rem;
+    text-align: center;
+    padding: 2rem;
     height: 100%;
     width: 100%;
     gap: 2rem;
@@ -691,6 +693,65 @@ footer a {
         0 0 1rem var(--color-favorite), 0 0 1.5rem var(--color-favorite);
 }
 
+.remove-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--color-background);
+    border: 1px solid var(--color-text);
+    border-radius: 1rem;
+    padding: 1rem;
+    text-align: center;
+    padding: 2rem;
+    width: 100%;
+    max-width: 40rem;
+}
+
+.remove-dialog h2 {
+    font-family: var(--font-sans);
+    margin-bottom: 1rem;
+}
+
+.remove-dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.dialog-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dialog-buttons button {
+    margin: 2rem;
+    padding: 1.5rem 1rem;
+    width: 100%;
+    font-size: 1.2rem;
+    border-radius: 1rem;
+}
+
+.close-button {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+}
+
+.cancel-button {
+    border: 1px solid var(--color-text);
+}
+
+.dialog-buttons button:hover {
+    text-shadow: 0 0 0.5rem var(--color-text), 0 0 1rem var(--color-text),
+        0 0 1.5rem var(--color-text);
+}
+
+.remove-button {
+    border: none;
+    background-color: #800;
+    color: #f0f0f0;
+}
+
 /* Slider styles based on CSS Only Carousel 
 https://skillthrive.gumroad.com/l/cgybb
 by Hunter Garret.
@@ -699,6 +760,7 @@ by Hunter Garret.
 .slider {
     position: relative;
     margin: 2rem auto;
+    max-width: 65rem;
 }
 
 .container-favorites {
@@ -849,7 +911,7 @@ by Hunter Garret.
     }
     .container-artworks.sorting {
         grid-template-columns: auto;
-        padding: 2rem;
+        padding: 0 1rem;
     }
     .container-artworks.sorting .image {
         height: auto;

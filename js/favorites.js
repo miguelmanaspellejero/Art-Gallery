@@ -71,7 +71,30 @@ function printNoFavoritesMessage() {
         .classList.add("display-none");
 }
 
-document.querySelector(".container-remove").addEventListener("click", () => {
+//Remove favorites dialog
+
+// Open and close dialog
+const openRemoveDialog = document.querySelector(".open-remove-dialog");
+const removeDialog = document.querySelector(".remove-dialog");
+
+openRemoveDialog.addEventListener("click", () => removeDialog.showModal());
+
+document
+    .querySelector(".cancel-button")
+    .addEventListener("click", () => removeDialog.close());
+
+document.querySelector(".cancel-button").addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+        removeDialog.close();
+    }
+});
+
+document
+    .querySelector(".close-button")
+    .addEventListener("click", () => removeDialog.close());
+
+// Remove favorites function
+document.querySelector(".remove-button").addEventListener("click", () => {
     // Change isFavorite value in results
     const favorites = loadFavorites();
     const results = loadResults();
@@ -90,7 +113,8 @@ document.querySelector(".container-remove").addEventListener("click", () => {
 
 //Add selection indicator to slider links.
 
-document.querySelectorAll(".slider-nav a")[0].classList.add("selected"); // Mark first one as selected on load.
+if (loadFavorites().length > 0)
+    document.querySelectorAll(".slider-nav a")[0].classList.add("selected"); // Mark first one as selected on load.
 
 document
     .querySelector(".slider-nav")
