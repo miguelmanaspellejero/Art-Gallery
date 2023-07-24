@@ -18,13 +18,12 @@ document.querySelector("#search-input").addEventListener("keydown", (e) => {
     }
 });
 
-function checkFavoriteCollection() {
-    if (loadFavorites().length > 0) {
-        printFavorites();
-        printFavStatus();
-    } else {
-        printNoFavoritesMessage();
-    }
+function checkFavoriteCollection() {}
+if (loadFavorites() === null || loadFavorites().length === 0) {
+    printNoFavoritesMessage();
+} else {
+    printFavorites();
+    printFavStatus();
 }
 
 checkFavoriteCollection();
@@ -52,6 +51,7 @@ function printFavorites() {
     }
     document.querySelector(".slider-nav").appendChild(slideFragment);
     document.querySelector(".container-favorites").appendChild(favFragment);
+    document.querySelectorAll(".slider-nav a")[0].classList.add("selected"); // Mark first nav link as selected on load.
 }
 
 function printFavStatus() {
@@ -108,13 +108,10 @@ document.querySelector(".remove-button").addEventListener("click", () => {
     favorites.splice(0);
     saveFavorites(favorites);
     //Update DOM status
-    checkFavoriteCollection();
+    window.location.href = "favorites.html";
 });
 
 //Add selection indicator to slider links.
-
-if (loadFavorites().length > 0)
-    document.querySelectorAll(".slider-nav a")[0].classList.add("selected"); // Mark first one as selected on load.
 
 document
     .querySelector(".slider-nav")
