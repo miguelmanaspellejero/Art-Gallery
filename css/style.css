@@ -117,6 +117,7 @@ select {
 /* Search box */
 
 .container-search {
+    align-self: center;
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
@@ -127,9 +128,6 @@ select {
     height: 2.5rem;
     border-radius: 2rem;
     padding: 0 1.5rem;
-    position: fixed;
-    left: 50%;
-    transform: translateX(-50%);
 }
 
 .container-search:focus-within {
@@ -714,7 +712,7 @@ footer a {
 }
 
 .remove-dialog::backdrop {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.9);
 }
 
 .dialog-buttons {
