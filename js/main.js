@@ -146,7 +146,8 @@ document.querySelector("#sort-select").addEventListener("change", (e) => {
     const container = document.querySelector(".container-artworks");
     container.classList.toggle("sorting", selection !== "relevance");
     container.replaceChildren();
-
+    showAll();
+    document.querySelector("#highlight-checkbox").checked = false;
     if (selection === "relevance") {
         printArtworks(loadResults()); // Saved array with original order
     } else if (selection === "title") {
