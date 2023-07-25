@@ -914,9 +914,6 @@ by Hunter Garret.
     .container-artworks.sorting .image {
         height: auto;
     }
-    .favorite-button {
-        visibility: visible;
-    }
     .container-favorites {
         aspect-ratio: 1/2;
         border: 0;
@@ -933,6 +930,12 @@ by Hunter Garret.
     }
     .container-search {
         width: 14rem;
+    }
+}
+
+@media (hover: none) {
+    .favorite-button {
+        visibility: visible;
     }
 }
 
